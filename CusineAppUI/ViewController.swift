@@ -7,49 +7,63 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+  
+    
 
-    let myLabel = UILabel()
-    let textField = UITextField()
+    let restaurentsTableView = UITableView()
+    var restaurents = [Restaurents]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = .white
-        let width = view.frame.size.width
-        let height = view.frame.size.height
+        //self.view.backgroundColor = .green
         
-       
-        myLabel.text = "MyLabel text test"
-        myLabel.textAlignment = .center
-        myLabel.textColor = .green
-        myLabel.frame = CGRect(x: width/2 - ((width * 0.6)/2), y: height/2, width: width * 0.6, height: 50)
+        restaurentsTableView.delegate = self
+        restaurentsTableView.dataSource = self
         
-        view.addSubview(myLabel)
+        setupUI()
+        
+        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "Italy", image: "pizza")
+        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "English", image: "eng-breakfast")
+        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "Middle Earth", image: "bakery")
+        
+        restaurents.append(minuteByTukTuk)
+        restaurents.append(cafeDeNoir)
+        restaurents.append(bakesByTella)
         
         
-        let myButton = UIButton()
-        myButton.setTitle("Click me",for: .normal)
-        myButton.setTitleColor(.green, for: UIControl.State.normal)
-        myButton.frame = CGRect(x: 100, y: 200, width: width/2, height: 100)
-        view.addSubview(myButton)
-        
-        myButton.addTarget(self, action:#selector(ViewController.myButtonTapped), for: .touchUpInside)
-        
+    }
+    // Kod karmaşıklığını önlemek için private setUPUI fonksiyonu oluşturuldu
     
-        textField.frame = CGRect(x: 100, y: 300, width: 100, height: 100)
-        textField.textColor = .black
-        textField.font = .boldSystemFont(ofSize: 12)
-        textField.placeholder = "Bana yaz"
-        view.addSubview(textField)
-        
+    private func setupUI() {
+        restaurentsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "customCell")
+        view.addSubview(restaurentsTableView)
+        restaurentsTableView.translatesAutoresizingMaskIntoConstraints = false
+        restaurentsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        restaurentsTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        restaurentsTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        restaurentsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         
         
     }
     
-    @objc func myButtonTapped() {
-        print("Button Tıklandı")
-        myLabel.text = textField.text
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return restaurents.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
+        cell.restaurentsLabel.text = restaurents[indexPath.row].name
+        cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
+        cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 380
     }
     
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A48A60F2ADF234C00C22274 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A48A60E2ADF234C00C22274 /* CustomTableViewCell.swift */; };
+		1A48A6112ADF33A800C22274 /* Restaurents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A48A6102ADF33A800C22274 /* Restaurents.swift */; };
 		1A98E1C22ADDC37500D1F4E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98E1C12ADDC37500D1F4E7 /* AppDelegate.swift */; };
 		1A98E1C42ADDC37500D1F4E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98E1C32ADDC37500D1F4E7 /* SceneDelegate.swift */; };
 		1A98E1C62ADDC37500D1F4E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A98E1C52ADDC37500D1F4E7 /* ViewController.swift */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A48A60E2ADF234C00C22274 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		1A48A6102ADF33A800C22274 /* Restaurents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurents.swift; sourceTree = "<group>"; };
 		1A98E1BE2ADDC37500D1F4E7 /* CusineAppUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CusineAppUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A98E1C12ADDC37500D1F4E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A98E1C32ADDC37500D1F4E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 				1A98E1C12ADDC37500D1F4E7 /* AppDelegate.swift */,
 				1A98E1C32ADDC37500D1F4E7 /* SceneDelegate.swift */,
 				1A98E1C52ADDC37500D1F4E7 /* ViewController.swift */,
+				1A48A60E2ADF234C00C22274 /* CustomTableViewCell.swift */,
+				1A48A6102ADF33A800C22274 /* Restaurents.swift */,
 				1A98E1CA2ADDC37600D1F4E7 /* Assets.xcassets */,
 				1A98E1CC2ADDC37600D1F4E7 /* LaunchScreen.storyboard */,
 				1A98E1CF2ADDC37600D1F4E7 /* Info.plist */,
@@ -135,7 +141,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A98E1C62ADDC37500D1F4E7 /* ViewController.swift in Sources */,
+				1A48A6112ADF33A800C22274 /* Restaurents.swift in Sources */,
 				1A98E1C22ADDC37500D1F4E7 /* AppDelegate.swift in Sources */,
+				1A48A60F2ADF234C00C22274 /* CustomTableViewCell.swift in Sources */,
 				1A98E1C42ADDC37500D1F4E7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
