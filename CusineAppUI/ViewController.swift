@@ -9,11 +9,12 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-  
     
-
+    
+    
     let restaurentsTableView = UITableView()
     var restaurents = [Restaurents]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         restaurentsTableView.delegate = self
         restaurentsTableView.dataSource = self
-        
         setupUI()
         
         let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "Italy", image: "pizza")
@@ -46,8 +46,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         restaurentsTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         restaurentsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,9 +64,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return 380
     }
     
-
-   
-  
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.lightGray // Başlık arka plan rengi
+        
+        let viewAllButton : UIButton = {
+            let button = UIButton()
+            button.setTitle("View all", for: .normal)
+            button.setTitleColor(UIColor.orange, for: .normal)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        headerView.addSubview(viewAllButton)
+        
+        let label = UILabel()
+        label.text = "Popular Restaurents"
+        label.textColor = UIColor.black
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(label)
+        
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10),
+            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+            viewAllButton.leadingAnchor.constraint(equalTo: label.trailingAnchor, constant: 80),
+            viewAllButton.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            
+        ])
+        return headerView
+    }
+    
+    // Başlık yüksekliğini ayarlayın
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40 // Başlık yüksekliği
+    }
 }
+
+
 
