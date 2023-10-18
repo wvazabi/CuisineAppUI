@@ -15,11 +15,11 @@ class Restaurents {
     var rate : Float
     var cuisine : String
     var image : String
-    
-     init(name: String, rate: Float, cuisine: String, image: String) {
-        self.name = name
-        self.rate = rate
-        self.cuisine = cuisine
-        self.image = image
-    }
+        
+    init(name: String, rate: Float, cuisine: String, image: String) {
+       self.name = name
+       self.rate = rate
+       self.cuisine = cuisine
+       self.image = image
+   }
 }

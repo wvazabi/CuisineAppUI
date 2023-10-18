@@ -33,10 +33,28 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16, weight: .thin)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .orange
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    let restaurentCuisine : UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let orangeIconImageView: UIImageView = {
+           let imageView = UIImageView()
+           imageView.image = UIImage(named: "orange_icon") // Turuncu ikonunuzun adını kullanın
+           imageView.contentMode = .scaleAspectFit
+           imageView.translatesAutoresizingMaskIntoConstraints = false
+           return imageView
+       }()
     
     private func addViews() {
         
@@ -44,6 +62,8 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(restaurentsLabel)
         addSubview(restaurentsRatingLabel)
         addSubview(restaurentsImageView)
+        addSubview(restaurentCuisine)
+        addSubview(orangeIconImageView)
         
         restaurentsImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         restaurentsImageView.heightAnchor.constraint(equalToConstant: 300).isActive = true
@@ -57,11 +77,18 @@ class CustomTableViewCell: UITableViewCell {
         restaurentsLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
         restaurentsRatingLabel.topAnchor.constraint(equalTo: restaurentsLabel.bottomAnchor, constant: 5).isActive = true
-        restaurentsRatingLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        restaurentsRatingLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        restaurentsRatingLabel.leftAnchor.constraint(equalTo: orangeIconImageView.rightAnchor, constant: 1).isActive = true
+       // restaurentsRatingLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
-        
-        
+        restaurentCuisine.leftAnchor.constraint(equalTo: restaurentsRatingLabel.rightAnchor,constant: 5).isActive = true
+        restaurentCuisine.topAnchor.constraint(equalTo: restaurentsLabel.bottomAnchor, constant: 5).isActive = true
+        //restaurentCuisine.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            orangeIconImageView.topAnchor.constraint(equalTo: restaurentsLabel.bottomAnchor, constant: 0),
+                    orangeIconImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 5),
+                    orangeIconImageView.widthAnchor.constraint(equalToConstant: 35), // İkonun genişliği
+                    orangeIconImageView.heightAnchor.constraint(equalToConstant: 35) // İkonun yüksekliği
+                ])
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
