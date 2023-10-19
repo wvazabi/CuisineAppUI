@@ -70,14 +70,14 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return stackView
     }()
     
-    private let deliveryOptionView : UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        return view
-    }()
-    var deliveryButton = UIButton()
+//    private let deliveryOptionView : UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .white
+//        view.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//        return view
+//    }()
+//    var deliveryButton = UIButton()
     
     private let searchView : UIView = {
         let view = UIView()
@@ -119,6 +119,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         welcome()
         createUI()
         
@@ -170,8 +171,6 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func createUI() {
         view.backgroundColor = .white
         
-        createCustomNavigationView()
-        
         view.addSubview(scrollView)
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -185,39 +184,39 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: -8).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
-        stackView.addArrangedSubview(deliveryOptionView)
-        let deliveryLabel = UILabel()
-        deliveryLabel.translatesAutoresizingMaskIntoConstraints = false
-        deliveryLabel.text = "Delivering to"
-        deliveryLabel.textAlignment = .left
-        deliveryLabel.font = .init(name: "Metropolis-Regular", size: 16)
-        deliveryLabel.textColor = UIColor(named: "SecondaryFont")
-        deliveryLabel.numberOfLines = 1
-        deliveryOptionView.addSubview(deliveryLabel)
-        deliveryLabel.leadingAnchor.constraint(equalTo: deliveryOptionView.leadingAnchor, constant: 10).isActive = true
-        deliveryLabel.topAnchor.constraint(equalTo: deliveryOptionView.topAnchor, constant: 4).isActive = true
-        deliveryLabel.widthAnchor.constraint(equalTo: deliveryOptionView.widthAnchor, multiplier: 0.4).isActive = true
-        
-        deliveryButton = UIButton(type: .system)
-        deliveryButton.translatesAutoresizingMaskIntoConstraints = false
-        deliveryButton.showsMenuAsPrimaryAction = true
-        deliveryButton.changesSelectionAsPrimaryAction = true
-        deliveryButton.menu = UIMenu(title: "Locations",
-                                     children: [UIAction(title: "Home",image: UIImage(systemName: "house.fill"), state: .on, handler: { action in
-            self.updateDeliveryButtonTitle(action.title)
-        }),
-                                                UIAction(title: "Work",image: UIImage(systemName: "briefcase.fill"), handler: { action in
-            self.updateDeliveryButtonTitle(action.title)
-        }),
-                                                UIAction(title: "Vacation Home",image: UIImage(systemName: "beach.umbrella.fill"), handler: { action in
-            self.updateDeliveryButtonTitle(action.title)
-        })])
-        deliveryButton.setTitle("Home ▼", for: .normal)
-
-        deliveryOptionView.addSubview(deliveryButton)
-        deliveryButton.leadingAnchor.constraint(equalTo: deliveryLabel.leadingAnchor).isActive = true
-        deliveryButton.topAnchor.constraint(equalTo: deliveryLabel.bottomAnchor,constant: 2).isActive = true
-        
+//        stackView.addArrangedSubview(deliveryOptionView)
+//        let deliveryLabel = UILabel()
+//        deliveryLabel.translatesAutoresizingMaskIntoConstraints = false
+//        deliveryLabel.text = "Delivering to"
+//        deliveryLabel.textAlignment = .left
+//        deliveryLabel.font = .init(name: "Metropolis-Regular", size: 16)
+//        deliveryLabel.textColor = UIColor(named: "SecondaryFont")
+//        deliveryLabel.numberOfLines = 1
+//        deliveryOptionView.addSubview(deliveryLabel)
+//        deliveryLabel.leadingAnchor.constraint(equalTo: deliveryOptionView.leadingAnchor, constant: 10).isActive = true
+//        deliveryLabel.topAnchor.constraint(equalTo: deliveryOptionView.topAnchor, constant: 4).isActive = true
+//        deliveryLabel.widthAnchor.constraint(equalTo: deliveryOptionView.widthAnchor, multiplier: 0.4).isActive = true
+//
+//        deliveryButton = UIButton(type: .system)
+//        deliveryButton.translatesAutoresizingMaskIntoConstraints = false
+//        deliveryButton.showsMenuAsPrimaryAction = true
+//        deliveryButton.changesSelectionAsPrimaryAction = true
+//        deliveryButton.menu = UIMenu(title: "Locations",
+//                                     children: [UIAction(title: "Home",image: UIImage(systemName: "house.fill"), state: .on, handler: { action in
+//            self.updateDeliveryButtonTitle(action.title)
+//        }),
+//                                                UIAction(title: "Work",image: UIImage(systemName: "briefcase.fill"), handler: { action in
+//            self.updateDeliveryButtonTitle(action.title)
+//        }),
+//                                                UIAction(title: "Vacation Home",image: UIImage(systemName: "beach.umbrella.fill"), handler: { action in
+//            self.updateDeliveryButtonTitle(action.title)
+//        })])
+//        deliveryButton.setTitle("Home ▼", for: .normal)
+//
+//        deliveryOptionView.addSubview(deliveryButton)
+//        deliveryButton.leadingAnchor.constraint(equalTo: deliveryLabel.leadingAnchor).isActive = true
+//        deliveryButton.topAnchor.constraint(equalTo: deliveryLabel.bottomAnchor,constant: 2).isActive = true
+//
         stackView.addArrangedSubview(searchView)
         searchView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10).isActive = true
         searchView.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: -10).isActive = true
@@ -231,22 +230,26 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchView.addSubview(searchImage)
         searchImage.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
         searchImage.leadingAnchor.constraint(equalTo: searchView.leadingAnchor,constant: 16).isActive = true
-        searchImage.topAnchor.constraint(equalTo: searchView.topAnchor,constant: 12).isActive = true
+        searchImage.topAnchor.constraint(equalTo: searchView.topAnchor).isActive = true
         searchImage.bottomAnchor.constraint(equalTo: searchView.bottomAnchor,constant: -12).isActive = true
         searchImage.widthAnchor.constraint(equalTo: searchImage.heightAnchor, multiplier: 1).isActive = true
         
-//        let searchTF = UITextField()
-//        searchTF.translatesAutoresizingMaskIntoConstraints = false
-//        searchTF.attributedPlaceholder = NSAttributedString(
-//            string: "Search Food",
-//            attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "PlaceholderFont")!]
-//        )
-        //searchTF.font = .init(name: "Metropolis-Regular", size: 20)
-//        searchView.addSubview(searchTF)
-//        searchTF.leftAnchor.constraint(equalTo: searchImage.rightAnchor, constant: 8).isActive = true
-//        searchTF.rightAnchor.constraint(equalTo: searchView.rightAnchor, constant: -16).isActive = true
-//        searchTF.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
-//        searchTF.heightAnchor.constraint(equalTo: searchView.heightAnchor,multiplier: 0.8).isActive = true
+        
+            
+            let searchTF = UITextField()
+            searchTF.translatesAutoresizingMaskIntoConstraints = false
+            searchTF.attributedPlaceholder = NSAttributedString(
+                string: "Search Food",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+            )
+
+        
+        searchTF.font = .systemFont(ofSize: 18)
+        searchView.addSubview(searchTF)
+        searchTF.leftAnchor.constraint(equalTo: searchImage.rightAnchor, constant: 8).isActive = true
+        searchTF.rightAnchor.constraint(equalTo: searchView.rightAnchor, constant: -16).isActive = true
+        searchTF.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
+        searchTF.heightAnchor.constraint(equalTo: searchView.heightAnchor,multiplier: 0.8).isActive = true
         
         //MARK: KITCHENS CV
         let kitchenCVLayout = UICollectionViewFlowLayout()
@@ -392,64 +395,61 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func createCustomNavigationView() {
-        let customNavigationView = UIView()
-        
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Good Morning!"
-        titleLabel.textColor = UIColor(named: "PrimaryFont")
-        titleLabel.font = .init(name: "Metropolis-ExtraBold", size: 22)
-        titleLabel.textAlignment = .left
-        customNavigationView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: customNavigationView.topAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: customNavigationView.leftAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: customNavigationView.bottomAnchor).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: customNavigationView.widthAnchor, multiplier: 0.5).isActive = true
-        
-        let cartImageView = UIImageView()
-        cartImageView.translatesAutoresizingMaskIntoConstraints = false
-        cartImageView.image = UIImage(systemName: "cart.fill")?.withRenderingMode(.alwaysTemplate)
-        cartImageView.tintColor = UIColor(named: "AppOrange")
-        cartImageView.contentMode = .scaleAspectFit
-        customNavigationView.addSubview(cartImageView)
-        cartImageView.topAnchor.constraint(equalTo: customNavigationView.topAnchor).isActive = true
-        cartImageView.rightAnchor.constraint(equalTo: customNavigationView.rightAnchor).isActive = true
-        cartImageView.bottomAnchor.constraint(equalTo: customNavigationView.bottomAnchor).isActive = true
-        cartImageView.widthAnchor.constraint(equalTo: cartImageView.heightAnchor, multiplier: 1).isActive = true
-        
-        navigationItem.titleView = customNavigationView
-    }
     
-    func updateDeliveryButtonTitle(_ actionTitle : String) {
-        deliveryButton.setTitle("\(actionTitle) ▼", for: .normal)
-    }
+    
+   
     
     func welcome() {
         // Uygulama yüklendiğinde otomatik olarak çağrılan işlev
         view.backgroundColor = .white
-        // Kullanıcı ismini sormak için bir UIAlertController oluşturun
-        let alertController = UIAlertController(title: "İsminiz nedir?", message: nil, preferredStyle: .alert)
+        let titleLabel = UILabel()
+        let alertController = UIAlertController(title: "What is your name", message: nil, preferredStyle: .alert)
 
         // Textfield ekleme
         alertController.addTextField { (textField) in
-            textField.placeholder = "İsminizi girin"
+            textField.placeholder = "Enter Your Name"
         }
 
         // "Tamam" eylemini oluşturun
-        let okAction = UIAlertAction(title: "Tamam", style: .default) { (_) in
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
             if let textField = alertController.textFields?.first, let name = textField.text {
                 // Kullanıcının girdiği ismi alın ve Navigation Bar başlığını güncelleyin
-                self.navigationItem.title = "Welcome " + name
-                self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
 
+                let greeting = self.getGreetingBasedOnTime()
+                titleLabel.text = "\(greeting) \(name)!"
+                self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
             }
         }
         alertController.addAction(okAction)
 
         // UIAlertController'ı gösterin
         present(alertController, animated: true, completion: nil)
+
+        let customNavigationView = UIView()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        titleLabel.textColor = UIColor.black
+        customNavigationView.addSubview(titleLabel)
+        titleLabel.topAnchor.constraint(equalTo: customNavigationView.topAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: customNavigationView.leftAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: customNavigationView.bottomAnchor).isActive = true
+        titleLabel.textAlignment = .left
+        navigationItem.titleView = customNavigationView
     }
+
+    func getGreetingBasedOnTime() -> String {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: Date())
+        
+        if 6...11 ~= hour {
+            return "Good Morning"
+        } else if 12...17 ~= hour {
+            return "Good Afternoon"
+        } else {
+            return "Good Evening"
+        }
+    }
+
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
