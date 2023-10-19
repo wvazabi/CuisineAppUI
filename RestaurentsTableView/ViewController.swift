@@ -1,7 +1,9 @@
 import UIKit
 
-class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
+    let containerView = UIView()
+    let scrollView = UIScrollView()
     let restaurentsTableView = UITableView()
     let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -12,17 +14,15 @@ class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        restaurentsTableView.delegate = self
-//        restaurentsTableView.dataSource = self
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        setupUI()
-
+        view.backgroundColor = .white
+        scrollView.backgroundColor = .white
+        containerView.backgroundColor  = .white
+        
+        
         // Restoran verilerini ekleyin (örnek veriler)
-        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "(124 ratings)Cafe      Italy", image: "pizza")
-        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "(280 ratings)Pub        English", image: "eng-breakfast")
-        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "(1000 ratings)Bakery       Middle Earth", image: "bakery")
+        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "(124 ratings)Cafe      Italy", image: "pizza", comment: 213)
+        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "(280 ratings)Pub        English", image: "eng-breakfast", comment: 423)
+        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "(1000 ratings)Bakery       Middle Earth", image: "bakery", comment: 432)
         
         let offer = Cuisine(name: "Offers", image: "offers")
         let srilanka = Cuisine(name: "Sri Lankan", image: "srilanka")
@@ -31,11 +31,10 @@ class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionV
         let turkish = Cuisine(name: "Turkish", image: "turkish")
         let spanish = Cuisine(name: "Spanish", image: "spanish")
         
-
         restaurents.append(minuteByTukTuk)
         restaurents.append(cafeDeNoir)
         restaurents.append(bakesByTella)
-    
+        
         cuisine.append(offer)
         cuisine.append(srilanka)
         cuisine.append(italian)
@@ -43,30 +42,47 @@ class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionV
         cuisine.append(turkish)
         cuisine.append(spanish)
         
+        setupUI()
     }
-
+    
     private func setupUI() {
         
-//        restaurentsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "customCell")
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+    
+        
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        containerView.addSubview(collectionView)
+        containerView.addSubview(restaurentsTableView)
+        
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        containerView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         collectionView.register(CustomCollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         
-        // TableView Constraints
-//        view.addSubview(restaurentsTableView)
-//        restaurentsTableView.translatesAutoresizingMaskIntoConstraints = false
-//        restaurentsTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        restaurentsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        restaurentsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        restaurentsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        restaurentsTableView.delegate = self
+        restaurentsTableView.dataSource = self
+        restaurentsTableView.register(CustomTableViewCell.self, forCellReuseIdentifier: "customCell")
         
-        // CollectionView Constraints
-        view.addSubview(collectionView)
+        collectionView.backgroundColor = UIColor.white
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-   
-        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true // Koleksiyon görünümünün yüksekliğini 200 olarak ayarlayın
+        collectionView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
+        
         
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
@@ -74,25 +90,35 @@ class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionV
             layout.itemSize = CGSize(width: 125, height: 150)
         }
         collectionView.isPagingEnabled = true
+        
+        restaurentsTableView.translatesAutoresizingMaskIntoConstraints = false
+        restaurentsTableView.topAnchor.constraint(equalTo: collectionView.bottomAnchor).isActive = true
+        restaurentsTableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        restaurentsTableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        restaurentsTableView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        
+ 
+
     }
 
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return restaurents.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
-//        cell.restaurentsLabel.text = restaurents[indexPath.row].name
-//        cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
-//        cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
-//        cell.restaurentCuisine.text = restaurents[indexPath.row].cuisine
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 380
-//    }
-//
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return restaurents.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
+        cell.restaurentsLabel.text = restaurents[indexPath.row].name
+        cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
+        cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
+        cell.restaurentCuisine.text = restaurents[indexPath.row].cuisine
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 380
+    }
+
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        if headerView == nil {
 //            headerView = UIView()
@@ -149,9 +175,7 @@ class ViewController: UIViewController,  UICollectionViewDelegate, UICollectionV
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 150) // Hücre yüksekliğini 150 yerine daha küçük bir değere ayarlayın
-    }
+    
    
 
 }
