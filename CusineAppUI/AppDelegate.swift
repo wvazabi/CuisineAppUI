@@ -14,7 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        if var infoDict = Bundle.main.infoDictionary, var userInterfaceStyle = infoDict["UIUserInterfaceStyle"] as? String {
+                    userInterfaceStyle = "Light"
+                    infoDict["UIUserInterfaceStyle"] = userInterfaceStyle
+                }
+            
         UINavigationBar.appearance().barStyle = .black
         return true
     }

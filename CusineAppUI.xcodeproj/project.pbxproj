@@ -51,9 +51,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A7D09292AE27947005F55D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1A4F2A512AE185B90043C779 /* FlowViewController.swift */,
+				1A4F2A532AE18AFC0043C779 /* SearchCollectionViewCell.swift */,
+				1A4F2A552AE1A1530043C779 /* PopularRestaurantsTableViewCell.swift */,
+				1A4F2A572AE1A6C10043C779 /* MostPopularRestaurantCollectionViewCell.swift */,
+				1A4F2A592AE1A98F0043C779 /* RecentItemsTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		1A98E1B52ADDC37400D1F4E7 = {
 			isa = PBXGroup;
 			children = (
+				1A7D09292AE27947005F55D2 /* View */,
 				1AFB2DD62ADFDD780037BB8B /* Model */,
 				1A98E1C02ADDC37500D1F4E7 /* CusineAppUI */,
 				1A98E1BF2ADDC37500D1F4E7 /* Products */,
@@ -71,17 +84,8 @@
 		1A98E1C02ADDC37500D1F4E7 /* CusineAppUI */ = {
 			isa = PBXGroup;
 			children = (
-				1A4F2A512AE185B90043C779 /* FlowViewController.swift */,
 				1A98E1C12ADDC37500D1F4E7 /* AppDelegate.swift */,
 				1A98E1C32ADDC37500D1F4E7 /* SceneDelegate.swift */,
-				1A4F2A532AE18AFC0043C779 /* SearchCollectionViewCell.swift */,
-				1A4F2A552AE1A1530043C779 /* PopularRestaurantsTableViewCell.swift */,
-				1A4F2A572AE1A6C10043C779 /* MostPopularRestaurantCollectionViewCell.swift */,
-				1A4F2A592AE1A98F0043C779 /* RecentItemsTableViewCell.swift */,
-				1AFB2DE02AE02EA80037BB8B /* imagesize.swift */,
-				1AFB2DDE2AE022CA0037BB8B /* Cuisine.swift */,
-				1A48A6102ADF33A800C22274 /* Restaurents.swift */,
-				1A4F2A5B2AE1B4500043C779 /* RecentItem.swift */,
 				1A98E1CA2ADDC37600D1F4E7 /* Assets.xcassets */,
 				1A98E1CC2ADDC37600D1F4E7 /* LaunchScreen.storyboard */,
 				1A98E1CF2ADDC37600D1F4E7 /* Info.plist */,
@@ -92,6 +96,10 @@
 		1AFB2DD62ADFDD780037BB8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1AFB2DE02AE02EA80037BB8B /* imagesize.swift */,
+				1AFB2DDE2AE022CA0037BB8B /* Cuisine.swift */,
+				1A48A6102ADF33A800C22274 /* Restaurents.swift */,
+				1A4F2A5B2AE1B4500043C779 /* RecentItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

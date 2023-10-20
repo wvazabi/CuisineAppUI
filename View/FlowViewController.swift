@@ -10,9 +10,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
-        case popularTV:
+        case restaurantsTableView:
             return popularRestaurants.count
-        case recentTV:
+        case recentItemTableView:
             return recentItems.count
         default :
             return 0
@@ -21,8 +21,8 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
-        case popularTV:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "popularTVCell", for: indexPath) as! PopularRestaurantsTableViewCell
+        case restaurantsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantsTableViewCell", for: indexPath) as! PopularRestaurantsTableViewCell
            
            
             cell.restaurentsLabel.text = restaurents[indexPath.row].name
@@ -33,7 +33,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
             return cell
             
-        case recentTV:
+        case recentItemTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentItemsCell", for: indexPath) as! RecentItemsTableViewCell
             //cell.isHeroEnabled = true
 
@@ -87,7 +87,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return view
     }()
     
-    private let popularTVView : UIView = {
+    private let restaurantsTableViewView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -112,9 +112,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }()
     
     var kitchensCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    var popularTV = UITableView()
+    var restaurantsTableView = UITableView()
     var popularCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    var recentTV = UITableView()
+    var recentItemTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -250,18 +250,18 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         
         //MARK: RESTAURANTS TV
-        stackView.addArrangedSubview(popularTVView)
+        stackView.addArrangedSubview(restaurantsTableViewView)
         
         let popularLabel = UILabel()
         popularLabel.translatesAutoresizingMaskIntoConstraints = false
         popularLabel.text = "Popular Restaurants"
-        popularLabel.textColor = UIColor(named: "PrimaryFont")
+        popularLabel.textColor = .black
         popularLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         popularLabel.textAlignment = .left
         //popularLabel.hero.id = "titleLabel"
-        popularTVView.addSubview(popularLabel)
-        popularLabel.leftAnchor.constraint(equalTo: popularTVView.leftAnchor, constant: 10).isActive = true
-        popularLabel.topAnchor.constraint(equalTo: popularTVView.topAnchor, constant: 10).isActive = true
+        restaurantsTableViewView.addSubview(popularLabel)
+        popularLabel.leftAnchor.constraint(equalTo: restaurantsTableViewView.leftAnchor, constant: 10).isActive = true
+        popularLabel.topAnchor.constraint(equalTo: restaurantsTableViewView.topAnchor, constant: 10).isActive = true
         popularLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         
@@ -271,31 +271,31 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         viewAllLabel.textColor = UIColor(named:"AppOrange")
         viewAllLabel.font = .init(name: "Metropolis-Bold", size: 14)
         viewAllLabel.textAlignment = .right
-        popularTVView.addSubview(viewAllLabel)
+        restaurantsTableViewView.addSubview(viewAllLabel)
         viewAllLabel.centerYAnchor.constraint(equalTo: popularLabel.centerYAnchor).isActive = true
-        viewAllLabel.rightAnchor.constraint(equalTo: popularTVView.rightAnchor, constant: -10).isActive = true
+        viewAllLabel.rightAnchor.constraint(equalTo: restaurantsTableViewView.rightAnchor, constant: -10).isActive = true
         
-        popularTV.translatesAutoresizingMaskIntoConstraints = false
-        popularTV.delegate = self
-        popularTV.dataSource = self
-        popularTV.backgroundColor = .white
-        popularTV.isScrollEnabled = false
-        popularTV.separatorColor  = .clear
-        popularTV.register(PopularRestaurantsTableViewCell.self, forCellReuseIdentifier: "popularTVCell")
-        popularTVView.addSubview(popularTV)
-        popularTV.leftAnchor.constraint(equalTo: popularTVView.leftAnchor).isActive = true
-        popularTV.rightAnchor.constraint(equalTo: popularTVView.rightAnchor).isActive = true
-        popularTV.topAnchor.constraint(equalTo: popularLabel.bottomAnchor,constant: 10).isActive = true
-        popularTV.bottomAnchor.constraint(equalTo: popularTVView.bottomAnchor).isActive = true
-        popularTV.rowHeight = 265
+        restaurantsTableView.translatesAutoresizingMaskIntoConstraints = false
+        restaurantsTableView.delegate = self
+        restaurantsTableView.dataSource = self
+        restaurantsTableView.backgroundColor = .white
+        restaurantsTableView.isScrollEnabled = false
+        restaurantsTableView.separatorColor  = .clear
+        restaurantsTableView.register(PopularRestaurantsTableViewCell.self, forCellReuseIdentifier: "restaurantsTableViewCell")
+        restaurantsTableViewView.addSubview(restaurantsTableView)
+        restaurantsTableView.leftAnchor.constraint(equalTo: restaurantsTableViewView.leftAnchor).isActive = true
+        restaurantsTableView.rightAnchor.constraint(equalTo: restaurantsTableViewView.rightAnchor).isActive = true
+        restaurantsTableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor,constant: 10).isActive = true
+        restaurantsTableView.bottomAnchor.constraint(equalTo: restaurantsTableViewView.bottomAnchor).isActive = true
+        restaurantsTableView.rowHeight = 265
         //MARK: RESTAURANTS CV
         stackView.addArrangedSubview(popularCVView)
         
         let popularLabel2 = UILabel()
         popularLabel2.translatesAutoresizingMaskIntoConstraints = false
         popularLabel2.text = "Most Popular"
-        popularLabel2.textColor = UIColor(named: "PrimaryFont")
-        popularLabel2.font = .init(name: "Metropolis-ExtraBold", size: 22)
+        popularLabel2.textColor = .black
+        popularLabel2.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         popularLabel2.textAlignment = .left
         //popularLabel2.hero.id = "titleLabel"
         popularCVView.addSubview(popularLabel2)
@@ -338,8 +338,8 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let popularLabel3 = UILabel()
         popularLabel3.translatesAutoresizingMaskIntoConstraints = false
         popularLabel3.text = "Recent Items"
-        popularLabel3.textColor = UIColor(named: "PrimaryFont")
-        popularLabel3.font = .init(name: "Metropolis-ExtraBold", size: 22)
+        popularLabel3.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        popularLabel3.textColor = .black
         popularLabel3.textAlignment = .left
         //popularLabel3.hero.id = "titleLabel"
         recentItemsView.addSubview(popularLabel3)
@@ -357,19 +357,19 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         viewAllLabel3.centerYAnchor.constraint(equalTo: popularLabel3.centerYAnchor).isActive = true
         viewAllLabel3.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor, constant: -10).isActive = true
         
-        recentTV.translatesAutoresizingMaskIntoConstraints = false
-        recentTV.delegate = self
-        recentTV.dataSource = self
-        recentTV.backgroundColor = .white
-        recentTV.isScrollEnabled = false
-        recentTV.separatorColor  = .clear
-        recentTV.register(RecentItemsTableViewCell.self, forCellReuseIdentifier: "recentItemsCell")
-        recentItemsView.addSubview(recentTV)
-        recentTV.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor).isActive = true
-        recentTV.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor).isActive = true
-        recentTV.topAnchor.constraint(equalTo: popularLabel3.bottomAnchor,constant: 10).isActive = true
-        recentTV.bottomAnchor.constraint(equalTo: recentItemsView.bottomAnchor).isActive = true
-        recentTV.rowHeight = (600-45) / 5
+        recentItemTableView.translatesAutoresizingMaskIntoConstraints = false
+        recentItemTableView.delegate = self
+        recentItemTableView.dataSource = self
+        recentItemTableView.backgroundColor = .white
+        recentItemTableView.isScrollEnabled = false
+        recentItemTableView.separatorColor  = .clear
+        recentItemTableView.register(RecentItemsTableViewCell.self, forCellReuseIdentifier: "recentItemsCell")
+        recentItemsView.addSubview(recentItemTableView)
+        recentItemTableView.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor).isActive = true
+        recentItemTableView.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor).isActive = true
+        recentItemTableView.topAnchor.constraint(equalTo: popularLabel3.bottomAnchor,constant: 10).isActive = true
+        recentItemTableView.bottomAnchor.constraint(equalTo: recentItemsView.bottomAnchor).isActive = true
+        recentItemTableView.rowHeight = (600-45) / 5
         
     }
     
