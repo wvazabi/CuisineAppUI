@@ -13,87 +13,81 @@ import UIKit
 
 class MostPopularRestaurantCollectionViewCell: UICollectionViewCell {
     
-    let restaurantImageView: UIImageView = {
+    let mostPopularRestaurantImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 7
         view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let nameLabel: UILabel = {
+    let mostPopularNameLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
         view.textAlignment = .left
-        //view.font = UIFont(name: .defaultCStringEncoding, size: <#T##CGFloat#>)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let typeLabel: UILabel = {
+    let mostPopularTypeLabel: UILabel = {
         let view = UILabel()
         view.textColor = .black
         view.textAlignment = .left
-        //view.font = .init(name: "Metropolis-Medium", size: 18)
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.hero.id = "secondaryLabel"
         return view
     }()
     
-    let starImageView: UIImageView = {
+    let mostPopularOrangeIcon: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
-        view.image = UIImage(systemName: "orange_icon")?.withRenderingMode(.alwaysTemplate)
+        view.image = UIImage(named: "orange_icon")
         view.tintColor = .orange
-        //view.hero.id = "starImage"
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let ratingLabel: UILabel = {
+    let mostPopularRatingLabel: UILabel = {
         let view = UILabel()
         view.textColor = .orange
         view.textAlignment = .left
-        //view.font = .init(name: "Metropolis-Regular", size: 16)
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.hero.id = "ratingLabel"
         return view
     }()
     
     private func configureViews() {
         backgroundColor = .white
         
-        addSubview(restaurantImageView)
-        restaurantImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        restaurantImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        restaurantImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        restaurantImageView.heightAnchor.constraint(equalTo: restaurantImageView.widthAnchor, multiplier: 0.5).isActive = true
+        addSubview(mostPopularRestaurantImageView)
+        mostPopularRestaurantImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        mostPopularRestaurantImageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        mostPopularRestaurantImageView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        mostPopularRestaurantImageView.heightAnchor.constraint(equalTo: mostPopularRestaurantImageView.widthAnchor, multiplier: 0.5).isActive = true
         
-        addSubview(nameLabel)
-        nameLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: restaurantImageView.bottomAnchor, constant: 4).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        addSubview(mostPopularNameLabel)
+        mostPopularNameLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        mostPopularNameLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        mostPopularNameLabel.topAnchor.constraint(equalTo: mostPopularRestaurantImageView.bottomAnchor, constant: 4).isActive = true
+        mostPopularNameLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        addSubview(typeLabel)
-        typeLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        typeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 4).isActive = true
-        typeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        typeLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+        addSubview(mostPopularTypeLabel)
+        mostPopularTypeLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        mostPopularTypeLabel.topAnchor.constraint(equalTo: mostPopularNameLabel.bottomAnchor, constant: 4).isActive = true
+        mostPopularTypeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        mostPopularTypeLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
         
-        addSubview(starImageView)
-        starImageView.leftAnchor.constraint(equalTo: typeLabel.rightAnchor, constant: 10).isActive = true
-        starImageView.centerYAnchor.constraint(equalTo: typeLabel.centerYAnchor).isActive = true
-        starImageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        starImageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
+        addSubview(mostPopularOrangeIcon)
+        mostPopularOrangeIcon.leftAnchor.constraint(equalTo: mostPopularTypeLabel.rightAnchor, constant: 10).isActive = true
+        mostPopularOrangeIcon.centerYAnchor.constraint(equalTo: mostPopularTypeLabel.centerYAnchor).isActive = true
+        mostPopularOrangeIcon.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        mostPopularOrangeIcon.widthAnchor.constraint(equalToConstant: 18).isActive = true
         
-        addSubview(ratingLabel)
-        ratingLabel.leftAnchor.constraint(equalTo: starImageView.rightAnchor).isActive = true
-        ratingLabel.topAnchor.constraint(equalTo: starImageView.topAnchor).isActive = true
-        ratingLabel.heightAnchor.constraint(equalTo: starImageView.heightAnchor, multiplier: 1).isActive = true
-        ratingLabel.widthAnchor.constraint(equalTo: ratingLabel.heightAnchor, multiplier: 1.5).isActive = true
+        addSubview(mostPopularRatingLabel)
+        mostPopularRatingLabel.leftAnchor.constraint(equalTo: mostPopularOrangeIcon.rightAnchor).isActive = true
+        mostPopularRatingLabel.topAnchor.constraint(equalTo: mostPopularOrangeIcon.topAnchor).isActive = true
+        mostPopularRatingLabel.heightAnchor.constraint(equalTo: mostPopularOrangeIcon.heightAnchor, multiplier: 1).isActive = true
+        mostPopularRatingLabel.widthAnchor.constraint(equalTo: mostPopularRatingLabel.heightAnchor, multiplier: 1.5).isActive = true
     }
     
     override init(frame: CGRect) {

@@ -8,108 +8,98 @@
 import Foundation
 
 import UIKit
-//import Hero
+
 
 class RecentItemsTableViewCell: UITableViewCell {
     
-    let itemImageView : UIImageView = {
+    let recentItemImageview : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.backgroundColor = .white
-        imageView.layer.cornerRadius = 8
-        //imageView.hero.id = "heroImageView"
+        imageView.layer.cornerRadius = 7
         return imageView
     }()
     
-    let itemNameLabel : UILabel = {
+    let recentItemNameLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
-        //label.font = .init(name: "Metropolis-Bold", size: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.hero.id = "primaryLabel"
         return label
     }()
     
-    let itemRestaurantNameLabel : UILabel = {
+    let recentItemRestaurantNameLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
-        //label.font = .init(name: "Metropolis-Medium", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.hero.id = "secondaryLabel"
         return label
     }()
     
-    let starImage : UIImageView = {
+    let orangeStarIcon : UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(systemName: "orange_icon")?.withRenderingMode(.alwaysTemplate)
+        imageView.image = UIImage(named: "orange_icon")
         imageView.tintColor = .orange
-        //imageView.hero.id = "starImage"
         return imageView
     }()
     
-    let itemRestaurantRatingLabel : UILabel = {
+    let recentItemRestaurantRatingLabel : UILabel = {
         let label = UILabel()
         label.textColor = .orange
         label.textAlignment = .left
-        //label.font = .init(name: "Metropolis-Bold", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.hero.id = "ratingLabel"
         return label
     }()
     
-    let ratingCountLabel : UILabel = {
+    let recentItemRatingCountLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .left
-        //label.font = .init(name: "Metropolis-Regular", size: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.hero.id = "ratingCountLabel"
         return label
     }()
     
     private func addViews() {
         backgroundColor = .white
         
-        addSubview(itemImageView)
-        itemImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        itemImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        itemImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
-        itemImageView.widthAnchor.constraint(equalTo: itemImageView.heightAnchor, multiplier: 1).isActive = true
+        addSubview(recentItemImageview)
+        recentItemImageview.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        recentItemImageview.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        recentItemImageview.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        recentItemImageview.widthAnchor.constraint(equalTo: recentItemImageview.heightAnchor, multiplier: 1).isActive = true
         
-        addSubview(itemNameLabel)
-        itemNameLabel.leftAnchor.constraint(equalTo: itemImageView.rightAnchor, constant: 16).isActive = true
-        itemNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10).isActive = true
-        itemNameLabel.topAnchor.constraint(equalTo: itemImageView.topAnchor).isActive = true
-        itemNameLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        addSubview(recentItemNameLabel)
+        recentItemNameLabel.leftAnchor.constraint(equalTo: recentItemImageview.rightAnchor, constant: 16).isActive = true
+        recentItemNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 10).isActive = true
+        recentItemNameLabel.topAnchor.constraint(equalTo: recentItemImageview.topAnchor).isActive = true
+        recentItemNameLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
-        addSubview(itemRestaurantNameLabel)
-        itemRestaurantNameLabel.leftAnchor.constraint(equalTo: itemNameLabel.leftAnchor).isActive = true
-        itemRestaurantNameLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        itemRestaurantNameLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor, constant: 4).isActive = true
-        itemRestaurantNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        addSubview(recentItemRestaurantNameLabel)
+        recentItemRestaurantNameLabel.leftAnchor.constraint(equalTo: recentItemNameLabel.leftAnchor).isActive = true
+        recentItemRestaurantNameLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        recentItemRestaurantNameLabel.topAnchor.constraint(equalTo: recentItemNameLabel.bottomAnchor, constant: 4).isActive = true
+        recentItemRestaurantNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        addSubview(starImage)
-        starImage.leftAnchor.constraint(equalTo: itemNameLabel.leftAnchor).isActive = true
-        starImage.topAnchor.constraint(equalTo: itemRestaurantNameLabel.bottomAnchor, constant: 4).isActive = true
-        starImage.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        starImage.widthAnchor.constraint(equalToConstant: 18).isActive = true
+        addSubview(orangeStarIcon)
+        orangeStarIcon.leftAnchor.constraint(equalTo: recentItemNameLabel.leftAnchor).isActive = true
+        orangeStarIcon.topAnchor.constraint(equalTo: recentItemRestaurantNameLabel.bottomAnchor, constant: 4).isActive = true
+        orangeStarIcon.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        orangeStarIcon.widthAnchor.constraint(equalToConstant: 18).isActive = true
         
-        addSubview(itemRestaurantRatingLabel)
-        itemRestaurantRatingLabel.leftAnchor.constraint(equalTo: starImage.rightAnchor).isActive = true
-        itemRestaurantRatingLabel.topAnchor.constraint(equalTo: starImage.topAnchor).isActive = true
-        itemRestaurantRatingLabel.heightAnchor.constraint(equalTo: starImage.heightAnchor, multiplier: 1).isActive = true
-        itemRestaurantRatingLabel.widthAnchor.constraint(equalTo: itemRestaurantRatingLabel.heightAnchor, multiplier: 1.5).isActive = true
+        addSubview(recentItemRestaurantRatingLabel)
+        recentItemRestaurantRatingLabel.leftAnchor.constraint(equalTo: orangeStarIcon.rightAnchor).isActive = true
+        recentItemRestaurantRatingLabel.topAnchor.constraint(equalTo: orangeStarIcon.topAnchor).isActive = true
+        recentItemRestaurantRatingLabel.heightAnchor.constraint(equalTo: orangeStarIcon.heightAnchor, multiplier: 1).isActive = true
+        recentItemRestaurantRatingLabel.widthAnchor.constraint(equalTo: recentItemRestaurantRatingLabel.heightAnchor, multiplier: 1.5).isActive = true
         
-        addSubview(ratingCountLabel)
-        ratingCountLabel.leftAnchor.constraint(equalTo: itemRestaurantRatingLabel.rightAnchor,constant: 4).isActive = true
-        ratingCountLabel.topAnchor.constraint(equalTo: itemRestaurantRatingLabel.topAnchor).isActive = true
-        ratingCountLabel.heightAnchor.constraint(equalTo: itemRestaurantRatingLabel.heightAnchor, multiplier: 1).isActive = true
+        addSubview(recentItemRatingCountLabel)
+        recentItemRatingCountLabel.leftAnchor.constraint(equalTo: recentItemRestaurantRatingLabel.rightAnchor,constant: 4).isActive = true
+        recentItemRatingCountLabel.topAnchor.constraint(equalTo: recentItemRestaurantRatingLabel.topAnchor).isActive = true
+        recentItemRatingCountLabel.heightAnchor.constraint(equalTo: recentItemRestaurantRatingLabel.heightAnchor, multiplier: 1).isActive = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

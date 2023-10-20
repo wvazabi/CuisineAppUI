@@ -34,14 +34,14 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return cell
             
         case recentItemTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recentItemsCell", for: indexPath) as! RecentItemsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recentItemsTableViewCell", for: indexPath) as! RecentItemsTableViewCell
             //cell.isHeroEnabled = true
 
-            cell.itemNameLabel.text = recentItems[indexPath.row].itemName
-            cell.itemImageView.image = UIImage(named: recentItems[indexPath.row].itemImageName)
-            cell.itemRestaurantNameLabel.text = "from \(recentItems[indexPath.row].itemRestaurant)"
-            cell.itemRestaurantRatingLabel.text = "\(recentItems[indexPath.row].itemRestaurantRating)"
-            cell.ratingCountLabel.text = "(\(recentItems[indexPath.row].ratingCount) ratings)"
+            cell.recentItemNameLabel.text = recentItems[indexPath.row].itemName
+            cell.recentItemImageview.image = UIImage(named: recentItems[indexPath.row].itemImageName)
+            cell.recentItemRestaurantNameLabel.text = "from \(recentItems[indexPath.row].itemRestaurant)"
+            cell.recentItemRestaurantRatingLabel.text = "\(recentItems[indexPath.row].itemRestaurantRating)"
+            cell.recentItemRatingCountLabel.text = "(\(recentItems[indexPath.row].ratingCount) ratings)"
             return cell
         default :
             return UITableViewCell()
@@ -363,7 +363,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         recentItemTableView.backgroundColor = .white
         recentItemTableView.isScrollEnabled = false
         recentItemTableView.separatorColor  = .clear
-        recentItemTableView.register(RecentItemsTableViewCell.self, forCellReuseIdentifier: "recentItemsCell")
+        recentItemTableView.register(RecentItemsTableViewCell.self, forCellReuseIdentifier: "recentItemsTableViewCell")
         recentItemsView.addSubview(recentItemTableView)
         recentItemTableView.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor).isActive = true
         recentItemTableView.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor).isActive = true
@@ -454,10 +454,10 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularCell", for: indexPath) as! MostPopularRestaurantCollectionViewCell
             //cell.isHeroEnabled = true
             
-            cell.nameLabel.text = popularRestaurants[indexPath.row].name
-            cell.restaurantImageView.image = UIImage(named: popularRestaurants[indexPath.row].image)
-            cell.typeLabel.text = popularRestaurants[indexPath.row].cuisine
-            cell.ratingLabel.text = "\(popularRestaurants.count)"
+            cell.mostPopularNameLabel.text = popularRestaurants[indexPath.row].name
+            cell.mostPopularRestaurantImageView.image = UIImage(named: popularRestaurants[indexPath.row].image)
+            cell.mostPopularTypeLabel.text = popularRestaurants[indexPath.row].cuisine
+            cell.mostPopularRatingLabel.text = "\(popularRestaurants.count)"
             return cell
         default :
             return UICollectionViewCell()
