@@ -12,7 +12,7 @@ Recent Items: Check out recent food items, see their ratings, and get informatio
 
 
 ## Screenshot
-![FlowScreen1](Assets/ss1.png)       ![FlowScreen2](Assets/ss2.png)       ![FlowScreen3](Assets/ss3.png)
+![FlowScreen1](Assets/ss1.png) ![FlowScreen2](Assets/ss2.png) ![FlowScreen3](Assets/ss3.png)
 
 ![Welcome Message1](Assets/ss4.png)   ![Welcome Message2](Assets/ss5.png) 
 
