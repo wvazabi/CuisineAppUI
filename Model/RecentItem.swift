@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecentItemModel {
+struct RecentItems {
     var itemName : String
     var itemRestaurant : String
     var itemImageName : String

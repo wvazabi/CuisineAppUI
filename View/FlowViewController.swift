@@ -5,7 +5,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var restaurents = [Restaurents]()
     var cuisine = [Cuisine]()
     var popularRestaurants = [Restaurents]()
-    var recentItems = [RecentItemModel]()
+    var recentItems = [RecentItems]()
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,7 +24,6 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case restaurantsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantsTableViewCell", for: indexPath) as! PopularRestaurantsTableViewCell
            
-           
             cell.restaurentsLabel.text = restaurents[indexPath.row].name
             cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
             cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
@@ -35,7 +34,6 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
         case recentItemTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentItemsTableViewCell", for: indexPath) as! RecentItemsTableViewCell
-            //cell.isHeroEnabled = true
 
             cell.recentItemNameLabel.text = recentItems[indexPath.row].itemName
             cell.recentItemImageview.image = UIImage(named: recentItems[indexPath.row].itemImageName)
@@ -49,7 +47,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 
-    private let scrollView: UIScrollView = {
+    private let flowScrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -59,7 +57,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return view
     }()
     
-    private let stackView : UIStackView = {
+    private let flowStackView : UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.backgroundColor = .white
@@ -69,25 +67,17 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return stackView
     }()
     
-//    private let deliveryOptionView : UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
-//        view.heightAnchor.constraint(equalToConstant: 70).isActive = true
-//        return view
-//    }()
-//    var deliveryButton = UIButton()
     
-    private let searchView : UIView = {
+    private let flowSearchView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor(named: "SearchBar")
-        view.layer.cornerRadius = 25
-        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        view.layer.cornerRadius = 28
+        view.heightAnchor.constraint(equalToConstant: 45).isActive = true
         return view
     }()
     
-    private let restaurantsTableViewView : UIView = {
+    private let popularRestaurantsTableViewView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -95,25 +85,25 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return view
     }()
     
-    private let popularCVView : UIView = {
+    private let mostPopularCollectionViewView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 270).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 280).isActive = true
         return view
     }()
     
-    private let recentItemsView : UIView = {
+    private let recentItemsTableViewView : UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 600).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 580).isActive = true
         return view
     }()
     
-    var kitchensCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var searchMenuCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var restaurantsTableView = UITableView()
-    var popularCV = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var mostPopularCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var recentItemTableView = UITableView()
     
     override func viewDidLoad() {
@@ -122,11 +112,11 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         welcome()
         createUI()
         
-        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "(124 ratings)Cafe      Italy", image: "popularPizza", comment: 213)
-        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "(280 ratings)Pub        English", image: "popularBreakfast", comment: 423)
-        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "(1000 ratings)Bakery       Middle Earth", image: "popularCroissant", comment: 432)
-        let susi = Restaurents(name: "Kakashi", rate: 5, cuisine: "(9998 ratings) Japanese Food", image: "popularSusi", comment: 2372)
-        let lasagna = Restaurents(name: "Buesnos Diaz", rate: 4.5, cuisine: "(767 ratings)Little Italy", image: "popularlasagna", comment: 432)
+        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "Cafe - Italy", image: "popularPizza", comment: 213)
+        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "Pub - English", image: "popularBreakfast", comment: 423)
+        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "Bakery - Middle Earth", image: "popularCroissant", comment: 432)
+        let susi = Restaurents(name: "Kakashi", rate: 5, cuisine: "Japanese - Food", image: "popularSusi", comment: 2372)
+        let lasagna = Restaurents(name: "Buesnos Diaz", rate: 4.5, cuisine: "Little Italy", image: "popularlasagna", comment: 432)
         
         let offer = Cuisine(name: "Offers", image: "offers")
         let srilanka = Cuisine(name: "Sri Lankan", image: "srilanka")
@@ -135,23 +125,23 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let turkish = Cuisine(name: "Turkish", image: "turkish")
         let spanish = Cuisine(name: "Spanish", image: "spanish")
         
-        let mPizza = RecentItemModel(itemName: "Mulberry Pizza by Josh", itemRestaurant: "Cafe - Italy ", itemImageName: "recentPizza",
+        let mPizza = RecentItems(itemName: "Mulberry Pizza by Josh", itemRestaurant: "Cafe - Italy ", itemImageName: "recentPizza",
                                     itemRestaurantRating: 4.9, ratingCount: 124)
-        let coffe = RecentItemModel(itemName: "Barita", itemRestaurant: "Cafe - France", itemImageName: "recentCafe",
+        let coffe = RecentItems(itemName: "Barita", itemRestaurant: "Cafe - France", itemImageName: "recentCafe",
                                     itemRestaurantRating: 3.9, ratingCount: 689)
-        let pizzaRush = RecentItemModel(itemName: "Pizza Rush Hour", itemRestaurant: "Restaurant - Italy", itemImageName: "recentPizza2",
+        let pizzaRush = RecentItems(itemName: "Pizza Rush Hour", itemRestaurant: "Restaurant - Italy", itemImageName: "recentPizza2",
                                     itemRestaurantRating: 4.3, ratingCount: 884)
-        let cornDogs = RecentItemModel(itemName: "Austin BBQ", itemRestaurant: "Street Food - USA", itemImageName: "recentCornDogs",
+        let cornDogs = RecentItems(itemName: "Austin BBQ", itemRestaurant: "Street Food - USA", itemImageName: "recentCornDogs",
                                     itemRestaurantRating: 4.5, ratingCount: 94)
-        let halal = RecentItemModel(itemName: "Halal Guys", itemRestaurant: "Street Food - NYC", itemImageName: "recentHalal",
+        let halal = RecentItems(itemName: "Halal Guys", itemRestaurant: "Street Food - NYC", itemImageName: "recentHalal",
                                     itemRestaurantRating: 4.5, ratingCount: 94)
         
         
         
-        let bambaa = Restaurents(name: "Café De Bambaa", rate: 4.2, cuisine: "(624 ratings)Cafe - Italy", image: "mostPopularPizza", comment: 645)
-        let borris = Restaurents(name: "Burger by Borris", rate: 3.1, cuisine: "(80 ratings)Pub-English", image: "mostPopularBlueBery", comment: 83)
-        let wagyu = Restaurents(name: "Tokya Fire", rate: 4.8, cuisine: "(1400 ratings)Legend", image: "mostPopularWagyu", comment: 4342)
-        let deep = Restaurents(name: "USA", rate: 5, cuisine: "(8400 ratings)Legend", image: "deep", comment: 6342)
+        let bambaa = Restaurents(name: "Café De Bambaa", rate: 4.2, cuisine: "Cafe - Italy", image: "mostPopularPizza", comment: 645)
+        let borris = Restaurents(name: "Burger by Borris", rate: 3.1, cuisine: "Pub-English", image: "mostPopularBlueBery", comment: 83)
+        let wagyu = Restaurents(name: "Tokya Fire", rate: 4.8, cuisine: "Legend", image: "mostPopularWagyu", comment: 4342)
+        let deep = Restaurents(name: "Deep Pizza", rate: 5, cuisine: "Legend - USA ", image: "deep", comment: 6342)
         
         
         restaurents.append(minuteByTukTuk)
@@ -168,7 +158,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         
         recentItems.append(mPizza)
-       recentItems.append(coffe)
+        recentItems.append(coffe)
         recentItems.append(pizzaRush)
         recentItems.append(cornDogs)
         recentItems.append(halal)
@@ -184,21 +174,21 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func createUI() {
         view.backgroundColor = .white
         
-        view.addSubview(scrollView)
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        view.addSubview(flowScrollView)
+        flowScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        flowScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        flowScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        flowScrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
-        scrollView.addSubview(stackView)
-        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor,constant: 16).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: -8).isActive = true
-        stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        stackView.addArrangedSubview(searchView)
-        searchView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10).isActive = true
-        searchView.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: -10).isActive = true
+        flowScrollView.addSubview(flowStackView)
+        flowStackView.topAnchor.constraint(equalTo: flowScrollView.topAnchor,constant: 16).isActive = true
+        flowStackView.leadingAnchor.constraint(equalTo: flowScrollView.leadingAnchor).isActive = true
+        flowStackView.trailingAnchor.constraint(equalTo: flowScrollView.trailingAnchor).isActive = true
+        flowStackView.bottomAnchor.constraint(equalTo: flowScrollView.bottomAnchor,constant: -8).isActive = true
+        flowStackView.widthAnchor.constraint(equalTo: flowScrollView.widthAnchor).isActive = true
+        flowStackView.addArrangedSubview(flowSearchView)
+        flowSearchView.leftAnchor.constraint(equalTo: flowStackView.leftAnchor, constant: 10).isActive = true
+        flowSearchView.rightAnchor.constraint(equalTo: flowStackView.rightAnchor, constant: -10).isActive = true
         
         let searchImage = UIImageView()
         searchImage.translatesAutoresizingMaskIntoConstraints = false
@@ -206,11 +196,11 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         searchImage.image = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
         searchImage.tintColor = .gray
         searchImage.contentMode = .scaleAspectFill
-        searchView.addSubview(searchImage)
-        searchImage.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
-        searchImage.leadingAnchor.constraint(equalTo: searchView.leadingAnchor,constant: 16).isActive = true
-        searchImage.topAnchor.constraint(equalTo: searchView.topAnchor).isActive = true
-        searchImage.bottomAnchor.constraint(equalTo: searchView.bottomAnchor,constant: -12).isActive = true
+        flowSearchView.addSubview(searchImage)
+        searchImage.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
+        searchImage.leadingAnchor.constraint(equalTo: flowSearchView.leadingAnchor,constant: 16).isActive = true
+        searchImage.topAnchor.constraint(equalTo: flowSearchView.topAnchor).isActive = true
+        searchImage.bottomAnchor.constraint(equalTo: flowSearchView.bottomAnchor,constant: -12).isActive = true
         searchImage.widthAnchor.constraint(equalTo: searchImage.heightAnchor, multiplier: 1).isActive = true
         
         
@@ -224,11 +214,11 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         
         searchTF.font = .systemFont(ofSize: 18)
-        searchView.addSubview(searchTF)
+        flowSearchView.addSubview(searchTF)
         searchTF.leftAnchor.constraint(equalTo: searchImage.rightAnchor, constant: 8).isActive = true
-        searchTF.rightAnchor.constraint(equalTo: searchView.rightAnchor, constant: -16).isActive = true
-        searchTF.centerYAnchor.constraint(equalTo: searchView.centerYAnchor).isActive = true
-        searchTF.heightAnchor.constraint(equalTo: searchView.heightAnchor,multiplier: 0.8).isActive = true
+        searchTF.rightAnchor.constraint(equalTo: flowSearchView.rightAnchor, constant: -16).isActive = true
+        searchTF.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
+        searchTF.heightAnchor.constraint(equalTo: flowSearchView.heightAnchor,multiplier: 0.8).isActive = true
         
         //MARK: KITCHENS CV
         let kitchenCVLayout = UICollectionViewFlowLayout()
@@ -237,20 +227,20 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         kitchenCVLayout.minimumLineSpacing = 10
         kitchenCVLayout.minimumInteritemSpacing = 10
         kitchenCVLayout.scrollDirection = .horizontal
-        kitchensCV = UICollectionView(frame: .zero, collectionViewLayout: kitchenCVLayout)
-        kitchensCV.translatesAutoresizingMaskIntoConstraints = false
-        kitchensCV.backgroundColor = .white
-        kitchensCV.showsVerticalScrollIndicator = false
-        kitchensCV.showsHorizontalScrollIndicator = false
-        kitchensCV.delegate = self
-        kitchensCV.dataSource = self
-        kitchensCV.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: "kitchenCell")
-        stackView.addArrangedSubview(kitchensCV)
-        kitchensCV.heightAnchor.constraint(equalToConstant: 160).isActive = true
+        searchMenuCollectionView = UICollectionView(frame: .zero, collectionViewLayout: kitchenCVLayout)
+        searchMenuCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        searchMenuCollectionView.backgroundColor = .white
+        searchMenuCollectionView.showsVerticalScrollIndicator = false
+        searchMenuCollectionView.showsHorizontalScrollIndicator = false
+        searchMenuCollectionView.delegate = self
+        searchMenuCollectionView.dataSource = self
+        searchMenuCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: "kitchenCell")
+        flowStackView.addArrangedSubview(searchMenuCollectionView)
+        searchMenuCollectionView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         
         
         //MARK: RESTAURANTS TV
-        stackView.addArrangedSubview(restaurantsTableViewView)
+        flowStackView.addArrangedSubview(popularRestaurantsTableViewView)
         
         let popularLabel = UILabel()
         popularLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -259,9 +249,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         popularLabel.textAlignment = .left
         //popularLabel.hero.id = "titleLabel"
-        restaurantsTableViewView.addSubview(popularLabel)
-        popularLabel.leftAnchor.constraint(equalTo: restaurantsTableViewView.leftAnchor, constant: 10).isActive = true
-        popularLabel.topAnchor.constraint(equalTo: restaurantsTableViewView.topAnchor, constant: 10).isActive = true
+        popularRestaurantsTableViewView.addSubview(popularLabel)
+        popularLabel.leftAnchor.constraint(equalTo: popularRestaurantsTableViewView.leftAnchor, constant: 10).isActive = true
+        popularLabel.topAnchor.constraint(equalTo: popularRestaurantsTableViewView.topAnchor, constant: 10).isActive = true
         popularLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         
@@ -271,9 +261,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         viewAllLabel.textColor = UIColor(named:"AppOrange")
         viewAllLabel.font = .init(name: "Metropolis-Bold", size: 14)
         viewAllLabel.textAlignment = .right
-        restaurantsTableViewView.addSubview(viewAllLabel)
+        popularRestaurantsTableViewView.addSubview(viewAllLabel)
         viewAllLabel.centerYAnchor.constraint(equalTo: popularLabel.centerYAnchor).isActive = true
-        viewAllLabel.rightAnchor.constraint(equalTo: restaurantsTableViewView.rightAnchor, constant: -10).isActive = true
+        viewAllLabel.rightAnchor.constraint(equalTo: popularRestaurantsTableViewView.rightAnchor, constant: -10).isActive = true
         
         restaurantsTableView.translatesAutoresizingMaskIntoConstraints = false
         restaurantsTableView.delegate = self
@@ -282,14 +272,14 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         restaurantsTableView.isScrollEnabled = false
         restaurantsTableView.separatorColor  = .clear
         restaurantsTableView.register(PopularRestaurantsTableViewCell.self, forCellReuseIdentifier: "restaurantsTableViewCell")
-        restaurantsTableViewView.addSubview(restaurantsTableView)
-        restaurantsTableView.leftAnchor.constraint(equalTo: restaurantsTableViewView.leftAnchor).isActive = true
-        restaurantsTableView.rightAnchor.constraint(equalTo: restaurantsTableViewView.rightAnchor).isActive = true
+        popularRestaurantsTableViewView.addSubview(restaurantsTableView)
+        restaurantsTableView.leftAnchor.constraint(equalTo: popularRestaurantsTableViewView.leftAnchor).isActive = true
+        restaurantsTableView.rightAnchor.constraint(equalTo: popularRestaurantsTableViewView.rightAnchor).isActive = true
         restaurantsTableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor,constant: 10).isActive = true
-        restaurantsTableView.bottomAnchor.constraint(equalTo: restaurantsTableViewView.bottomAnchor).isActive = true
+        restaurantsTableView.bottomAnchor.constraint(equalTo: popularRestaurantsTableViewView.bottomAnchor).isActive = true
         restaurantsTableView.rowHeight = 265
         //MARK: RESTAURANTS CV
-        stackView.addArrangedSubview(popularCVView)
+        flowStackView.addArrangedSubview(mostPopularCollectionViewView)
         
         let popularLabel2 = UILabel()
         popularLabel2.translatesAutoresizingMaskIntoConstraints = false
@@ -298,9 +288,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularLabel2.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         popularLabel2.textAlignment = .left
         //popularLabel2.hero.id = "titleLabel"
-        popularCVView.addSubview(popularLabel2)
-        popularLabel2.leftAnchor.constraint(equalTo: popularCVView.leftAnchor, constant: 10).isActive = true
-        popularLabel2.topAnchor.constraint(equalTo: popularCVView.topAnchor).isActive = true
+        mostPopularCollectionViewView.addSubview(popularLabel2)
+        popularLabel2.leftAnchor.constraint(equalTo: mostPopularCollectionViewView.leftAnchor, constant: 10).isActive = true
+        popularLabel2.topAnchor.constraint(equalTo: mostPopularCollectionViewView.topAnchor).isActive = true
         popularLabel2.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         let viewAllLabel2 = UILabel()
@@ -309,31 +299,31 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         viewAllLabel2.textColor = UIColor(named:"AppOrange")
         viewAllLabel2.font = .init(name: "Metropolis-Bold", size: 14)
         viewAllLabel2.textAlignment = .right
-        popularCVView.addSubview(viewAllLabel2)
+        mostPopularCollectionViewView.addSubview(viewAllLabel2)
         viewAllLabel2.centerYAnchor.constraint(equalTo: popularLabel2.centerYAnchor).isActive = true
-        viewAllLabel2.rightAnchor.constraint(equalTo: popularCVView.rightAnchor, constant: -10).isActive = true
+        viewAllLabel2.rightAnchor.constraint(equalTo: mostPopularCollectionViewView.rightAnchor, constant: -10).isActive = true
         
         let layout2 = UICollectionViewFlowLayout()
         layout2.itemSize = CGSize(width: view.frame.width * 0.6, height: 190)
         layout2.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout2.minimumLineSpacing = 20
         layout2.scrollDirection = .horizontal
-        popularCV = UICollectionView(frame: .zero, collectionViewLayout: layout2)
-        popularCV.translatesAutoresizingMaskIntoConstraints = false
-        popularCV.backgroundColor = .white
-        popularCV.showsVerticalScrollIndicator = false
-        popularCV.showsHorizontalScrollIndicator = false
-        popularCV.delegate = self
-        popularCV.dataSource = self
-        popularCV.register(MostPopularRestaurantCollectionViewCell.self, forCellWithReuseIdentifier: "popularCell")
-        popularCVView.addSubview(popularCV)
-        popularCV.leftAnchor.constraint(equalTo: popularCVView.leftAnchor).isActive = true
-        popularCV.rightAnchor.constraint(equalTo: popularCVView.rightAnchor).isActive = true
-        popularCV.topAnchor.constraint(equalTo: popularLabel2.bottomAnchor,constant: 10).isActive = true
-        popularCV.bottomAnchor.constraint(equalTo: popularCVView.bottomAnchor).isActive = true
+        mostPopularCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout2)
+        mostPopularCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        mostPopularCollectionView.backgroundColor = .white
+        mostPopularCollectionView.showsVerticalScrollIndicator = false
+        mostPopularCollectionView.showsHorizontalScrollIndicator = false
+        mostPopularCollectionView.delegate = self
+        mostPopularCollectionView.dataSource = self
+        mostPopularCollectionView.register(MostPopularRestaurantCollectionViewCell.self, forCellWithReuseIdentifier: "popularCell")
+        mostPopularCollectionViewView.addSubview(mostPopularCollectionView)
+        mostPopularCollectionView.leftAnchor.constraint(equalTo: mostPopularCollectionViewView.leftAnchor).isActive = true
+        mostPopularCollectionView.rightAnchor.constraint(equalTo: mostPopularCollectionViewView.rightAnchor).isActive = true
+        mostPopularCollectionView.topAnchor.constraint(equalTo: popularLabel2.bottomAnchor,constant: 10).isActive = true
+        mostPopularCollectionView.bottomAnchor.constraint(equalTo: mostPopularCollectionViewView.bottomAnchor).isActive = true
         
         //MARK: RECENT ITEMS TV
-        stackView.addArrangedSubview(recentItemsView)
+        flowStackView.addArrangedSubview(recentItemsTableViewView)
         
         let popularLabel3 = UILabel()
         popularLabel3.translatesAutoresizingMaskIntoConstraints = false
@@ -342,9 +332,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularLabel3.textColor = .black
         popularLabel3.textAlignment = .left
         //popularLabel3.hero.id = "titleLabel"
-        recentItemsView.addSubview(popularLabel3)
-        popularLabel3.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor, constant: 10).isActive = true
-        popularLabel3.topAnchor.constraint(equalTo: recentItemsView.topAnchor, constant: 10).isActive = true
+        recentItemsTableViewView.addSubview(popularLabel3)
+        popularLabel3.leftAnchor.constraint(equalTo: recentItemsTableViewView.leftAnchor, constant: 10).isActive = true
+        popularLabel3.topAnchor.constraint(equalTo: recentItemsTableViewView.topAnchor, constant: 10).isActive = true
         popularLabel3.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         let viewAllLabel3 = UILabel()
@@ -353,9 +343,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         viewAllLabel3.textColor = UIColor(named:"AppOrange")
         viewAllLabel3.font = .init(name: "Metropolis-Bold", size: 14)
         viewAllLabel3.textAlignment = .right
-        recentItemsView.addSubview(viewAllLabel3)
+        recentItemsTableViewView.addSubview(viewAllLabel3)
         viewAllLabel3.centerYAnchor.constraint(equalTo: popularLabel3.centerYAnchor).isActive = true
-        viewAllLabel3.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor, constant: -10).isActive = true
+        viewAllLabel3.rightAnchor.constraint(equalTo: recentItemsTableViewView.rightAnchor, constant: -10).isActive = true
         
         recentItemTableView.translatesAutoresizingMaskIntoConstraints = false
         recentItemTableView.delegate = self
@@ -364,11 +354,11 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         recentItemTableView.isScrollEnabled = false
         recentItemTableView.separatorColor  = .clear
         recentItemTableView.register(RecentItemsTableViewCell.self, forCellReuseIdentifier: "recentItemsTableViewCell")
-        recentItemsView.addSubview(recentItemTableView)
-        recentItemTableView.leftAnchor.constraint(equalTo: recentItemsView.leftAnchor).isActive = true
-        recentItemTableView.rightAnchor.constraint(equalTo: recentItemsView.rightAnchor).isActive = true
+        recentItemsTableViewView.addSubview(recentItemTableView)
+        recentItemTableView.leftAnchor.constraint(equalTo: recentItemsTableViewView.leftAnchor).isActive = true
+        recentItemTableView.rightAnchor.constraint(equalTo: recentItemsTableViewView.rightAnchor).isActive = true
         recentItemTableView.topAnchor.constraint(equalTo: popularLabel3.bottomAnchor,constant: 10).isActive = true
-        recentItemTableView.bottomAnchor.constraint(equalTo: recentItemsView.bottomAnchor).isActive = true
+        recentItemTableView.bottomAnchor.constraint(equalTo: recentItemsTableViewView.bottomAnchor).isActive = true
         recentItemTableView.rowHeight = (600-45) / 5
         
     }
@@ -432,9 +422,9 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
-        case kitchensCV :
+        case searchMenuCollectionView :
             return cuisine.count
-        case popularCV :
+        case mostPopularCollectionView :
             return popularRestaurants.count
         default :
             return 0
@@ -443,14 +433,14 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
-        case kitchensCV :
+        case searchMenuCollectionView :
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kitchenCell", for: indexPath) as! SearchCollectionViewCell
             
             cell.cuisineLabel.text = cuisine[indexPath.row].name
             cell.cuisineImageView.image = UIImage(named: cuisine[indexPath.row].image)
             return cell
             
-        case popularCV :
+        case mostPopularCollectionView :
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularCell", for: indexPath) as! MostPopularRestaurantCollectionViewCell
             //cell.isHeroEnabled = true
             
