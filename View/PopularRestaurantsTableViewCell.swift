@@ -13,7 +13,6 @@ class PopularRestaurantsTableViewCell: UITableViewCell {
     let restaurentsImageView : UIImageView = {
        let imageView = UIImageView()
         imageView.backgroundColor = .clear
-        //imageView.backgroundColor = .red
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +41,6 @@ class PopularRestaurantsTableViewCell: UITableViewCell {
     let restaurentCuisine : UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
-        //label.textColor = .gray
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +49,7 @@ class PopularRestaurantsTableViewCell: UITableViewCell {
     
     let orangeIconImageView: UIImageView = {
            let imageView = UIImageView()
-           imageView.image = UIImage(named: "orange_icon") // Turuncu ikonunuzun adını kullanın
+           imageView.image = UIImage(named: "orange_icon")
            imageView.contentMode = .scaleAspectFit
            imageView.translatesAutoresizingMaskIntoConstraints = false
            return imageView
@@ -116,18 +114,18 @@ class PopularRestaurantsTableViewCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("error")
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        
     }
     
 

@@ -5,9 +5,6 @@
 //  Created by Enes Kaya on 19.10.2023.
 //
 
-
-
-
 import UIKit
 
 

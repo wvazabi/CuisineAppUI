@@ -24,7 +24,6 @@ class SearchCollectionViewCell: UICollectionViewCell {
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

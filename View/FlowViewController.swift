@@ -7,7 +7,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var popularRestaurants = [Restaurents]()
     var recentItems = [RecentItems]()
     
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case restaurantsTableView:
@@ -23,18 +23,18 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         switch tableView {
         case restaurantsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantsTableViewCell", for: indexPath) as! PopularRestaurantsTableViewCell
-           
+            
             cell.restaurentsLabel.text = restaurents[indexPath.row].name
             cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
             cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
             cell.restaurentCuisine.text = restaurents[indexPath.row].cuisine
             cell.commentLabel.text = "\(restaurents[indexPath.row].comment)"
-        
+            
             return cell
             
         case recentItemTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recentItemsTableViewCell", for: indexPath) as! RecentItemsTableViewCell
-
+            
             cell.recentItemNameLabel.text = recentItems[indexPath.row].itemName
             cell.recentItemImageview.image = UIImage(named: recentItems[indexPath.row].itemImageName)
             cell.recentItemRestaurantNameLabel.text = "from \(recentItems[indexPath.row].itemRestaurant)"
@@ -46,7 +46,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-
+    
     private let flowScrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -126,15 +126,15 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let spanish = Cuisine(name: "Spanish", image: "spanish")
         
         let mPizza = RecentItems(itemName: "Mulberry Pizza by Josh", itemRestaurant: "Cafe - Italy ", itemImageName: "recentPizza",
-                                    itemRestaurantRating: 4.9, ratingCount: 124)
+                                 itemRestaurantRating: 4.9, ratingCount: 124)
         let coffe = RecentItems(itemName: "Barita", itemRestaurant: "Cafe - France", itemImageName: "recentCafe",
-                                    itemRestaurantRating: 3.9, ratingCount: 689)
+                                itemRestaurantRating: 3.9, ratingCount: 689)
         let pizzaRush = RecentItems(itemName: "Pizza Rush Hour", itemRestaurant: "Restaurant - Italy", itemImageName: "recentPizza2",
                                     itemRestaurantRating: 4.3, ratingCount: 884)
         let cornDogs = RecentItems(itemName: "Austin BBQ", itemRestaurant: "Street Food - USA", itemImageName: "recentCornDogs",
-                                    itemRestaurantRating: 4.5, ratingCount: 94)
+                                   itemRestaurantRating: 4.5, ratingCount: 94)
         let halal = RecentItems(itemName: "Halal Guys", itemRestaurant: "Street Food - NYC", itemImageName: "recentHalal",
-                                    itemRestaurantRating: 4.5, ratingCount: 94)
+                                itemRestaurantRating: 4.5, ratingCount: 94)
         
         
         
@@ -190,79 +190,77 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         flowSearchView.leftAnchor.constraint(equalTo: flowStackView.leftAnchor, constant: 10).isActive = true
         flowSearchView.rightAnchor.constraint(equalTo: flowStackView.rightAnchor, constant: -10).isActive = true
         
-        let searchImage = UIImageView()
-        searchImage.translatesAutoresizingMaskIntoConstraints = false
-        searchImage.image = UIImage()
-        searchImage.image = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
-        searchImage.tintColor = .gray
-        searchImage.contentMode = .scaleAspectFill
-        flowSearchView.addSubview(searchImage)
-        searchImage.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
-        searchImage.leadingAnchor.constraint(equalTo: flowSearchView.leadingAnchor,constant: 16).isActive = true
-        searchImage.topAnchor.constraint(equalTo: flowSearchView.topAnchor).isActive = true
-        searchImage.bottomAnchor.constraint(equalTo: flowSearchView.bottomAnchor,constant: -12).isActive = true
-        searchImage.widthAnchor.constraint(equalTo: searchImage.heightAnchor, multiplier: 1).isActive = true
+        let searchBarIcon = UIImageView()
+        searchBarIcon.translatesAutoresizingMaskIntoConstraints = false
+        searchBarIcon.image = UIImage()
+        searchBarIcon.image = UIImage(systemName: "magnifyingglass")?.withRenderingMode(.alwaysTemplate)
+        searchBarIcon.tintColor = .gray
+        searchBarIcon.contentMode = .scaleAspectFill
+        flowSearchView.addSubview(searchBarIcon)
+        searchBarIcon.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
+        searchBarIcon.leadingAnchor.constraint(equalTo: flowSearchView.leadingAnchor,constant: 16).isActive = true
+        searchBarIcon.topAnchor.constraint(equalTo: flowSearchView.topAnchor).isActive = true
+        searchBarIcon.bottomAnchor.constraint(equalTo: flowSearchView.bottomAnchor,constant: -12).isActive = true
+        searchBarIcon.widthAnchor.constraint(equalTo: searchBarIcon.heightAnchor, multiplier: 1).isActive = true
         
         
-            
-            let searchTF = UITextField()
-            searchTF.translatesAutoresizingMaskIntoConstraints = false
-            searchTF.attributedPlaceholder = NSAttributedString(
-                string: "Search Food",
-                attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
-            )
-
         
-        searchTF.font = .systemFont(ofSize: 18)
-        flowSearchView.addSubview(searchTF)
-        searchTF.leftAnchor.constraint(equalTo: searchImage.rightAnchor, constant: 8).isActive = true
-        searchTF.rightAnchor.constraint(equalTo: flowSearchView.rightAnchor, constant: -16).isActive = true
-        searchTF.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
-        searchTF.heightAnchor.constraint(equalTo: flowSearchView.heightAnchor,multiplier: 0.8).isActive = true
+        let searchBarTextField = UITextField()
+        searchBarTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchBarTextField.attributedPlaceholder = NSAttributedString(
+            string: "Search Food",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
         
-        //MARK: KITCHENS CV
-        let kitchenCVLayout = UICollectionViewFlowLayout()
-        kitchenCVLayout.itemSize = CGSize(width: view.frame.width / 3.5, height: 140)
-        kitchenCVLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        kitchenCVLayout.minimumLineSpacing = 10
-        kitchenCVLayout.minimumInteritemSpacing = 10
-        kitchenCVLayout.scrollDirection = .horizontal
-        searchMenuCollectionView = UICollectionView(frame: .zero, collectionViewLayout: kitchenCVLayout)
+        
+        searchBarTextField.font = .systemFont(ofSize: 18)
+        flowSearchView.addSubview(searchBarTextField)
+        searchBarTextField.leftAnchor.constraint(equalTo: searchBarIcon.rightAnchor, constant: 8).isActive = true
+        searchBarTextField.rightAnchor.constraint(equalTo: flowSearchView.rightAnchor, constant: -16).isActive = true
+        searchBarTextField.centerYAnchor.constraint(equalTo: flowSearchView.centerYAnchor).isActive = true
+        searchBarTextField.heightAnchor.constraint(equalTo: flowSearchView.heightAnchor,multiplier: 0.8).isActive = true
+        
+        
+        let searchCollectionViewLayout = UICollectionViewFlowLayout()
+        searchCollectionViewLayout.itemSize = CGSize(width: view.frame.width / 3.5, height: 140)
+        searchCollectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        searchCollectionViewLayout.minimumLineSpacing = 10
+        searchCollectionViewLayout.minimumInteritemSpacing = 10
+        searchCollectionViewLayout.scrollDirection = .horizontal
+        searchMenuCollectionView = UICollectionView(frame: .zero, collectionViewLayout: searchCollectionViewLayout)
         searchMenuCollectionView.translatesAutoresizingMaskIntoConstraints = false
         searchMenuCollectionView.backgroundColor = .white
         searchMenuCollectionView.showsVerticalScrollIndicator = false
         searchMenuCollectionView.showsHorizontalScrollIndicator = false
         searchMenuCollectionView.delegate = self
         searchMenuCollectionView.dataSource = self
-        searchMenuCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: "kitchenCell")
+        searchMenuCollectionView.register(SearchCollectionViewCell.self, forCellWithReuseIdentifier: "searchCell")
         flowStackView.addArrangedSubview(searchMenuCollectionView)
         searchMenuCollectionView.heightAnchor.constraint(equalToConstant: 160).isActive = true
         
         
-        //MARK: RESTAURANTS TV
+        
         flowStackView.addArrangedSubview(popularRestaurantsTableViewView)
         
-        let popularLabel = UILabel()
-        popularLabel.translatesAutoresizingMaskIntoConstraints = false
-        popularLabel.text = "Popular Restaurants"
-        popularLabel.textColor = .black
-        popularLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        popularLabel.textAlignment = .left
-        //popularLabel.hero.id = "titleLabel"
-        popularRestaurantsTableViewView.addSubview(popularLabel)
-        popularLabel.leftAnchor.constraint(equalTo: popularRestaurantsTableViewView.leftAnchor, constant: 10).isActive = true
-        popularLabel.topAnchor.constraint(equalTo: popularRestaurantsTableViewView.topAnchor, constant: 10).isActive = true
-        popularLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        let popularRestaurantLabel = UILabel()
+        popularRestaurantLabel.translatesAutoresizingMaskIntoConstraints = false
+        popularRestaurantLabel.text = "Popular Restaurants"
+        popularRestaurantLabel.textColor = .black
+        popularRestaurantLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        popularRestaurantLabel.textAlignment = .left
+        popularRestaurantsTableViewView.addSubview(popularRestaurantLabel)
+        popularRestaurantLabel.leftAnchor.constraint(equalTo: popularRestaurantsTableViewView.leftAnchor, constant: 10).isActive = true
+        popularRestaurantLabel.topAnchor.constraint(equalTo: popularRestaurantsTableViewView.topAnchor, constant: 10).isActive = true
+        popularRestaurantLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         
         let viewAllLabel = UILabel()
         viewAllLabel.translatesAutoresizingMaskIntoConstraints = false
         viewAllLabel.text = "View All"
-        viewAllLabel.textColor = UIColor(named:"AppOrange")
-        viewAllLabel.font = .init(name: "Metropolis-Bold", size: 14)
+        viewAllLabel.textColor = .orange
         viewAllLabel.textAlignment = .right
         popularRestaurantsTableViewView.addSubview(viewAllLabel)
-        viewAllLabel.centerYAnchor.constraint(equalTo: popularLabel.centerYAnchor).isActive = true
+        viewAllLabel.centerYAnchor.constraint(equalTo: popularRestaurantLabel.centerYAnchor).isActive = true
         viewAllLabel.rightAnchor.constraint(equalTo: popularRestaurantsTableViewView.rightAnchor, constant: -10).isActive = true
         
         restaurantsTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -275,40 +273,40 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularRestaurantsTableViewView.addSubview(restaurantsTableView)
         restaurantsTableView.leftAnchor.constraint(equalTo: popularRestaurantsTableViewView.leftAnchor).isActive = true
         restaurantsTableView.rightAnchor.constraint(equalTo: popularRestaurantsTableViewView.rightAnchor).isActive = true
-        restaurantsTableView.topAnchor.constraint(equalTo: popularLabel.bottomAnchor,constant: 10).isActive = true
+        restaurantsTableView.topAnchor.constraint(equalTo: popularRestaurantLabel.bottomAnchor,constant: 10).isActive = true
         restaurantsTableView.bottomAnchor.constraint(equalTo: popularRestaurantsTableViewView.bottomAnchor).isActive = true
         restaurantsTableView.rowHeight = 265
-        //MARK: RESTAURANTS CV
+        
         flowStackView.addArrangedSubview(mostPopularCollectionViewView)
         
-        let popularLabel2 = UILabel()
-        popularLabel2.translatesAutoresizingMaskIntoConstraints = false
-        popularLabel2.text = "Most Popular"
-        popularLabel2.textColor = .black
-        popularLabel2.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        popularLabel2.textAlignment = .left
-        //popularLabel2.hero.id = "titleLabel"
-        mostPopularCollectionViewView.addSubview(popularLabel2)
-        popularLabel2.leftAnchor.constraint(equalTo: mostPopularCollectionViewView.leftAnchor, constant: 10).isActive = true
-        popularLabel2.topAnchor.constraint(equalTo: mostPopularCollectionViewView.topAnchor).isActive = true
-        popularLabel2.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        let mostPopularLabel = UILabel()
+        mostPopularLabel.translatesAutoresizingMaskIntoConstraints = false
+        mostPopularLabel.text = "Most Popular"
+        mostPopularLabel.textColor = .black
+        mostPopularLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        mostPopularLabel.textAlignment = .left
         
-        let viewAllLabel2 = UILabel()
-        viewAllLabel2.translatesAutoresizingMaskIntoConstraints = false
-        viewAllLabel2.text = "View All"
-        viewAllLabel2.textColor = UIColor(named:"AppOrange")
-        viewAllLabel2.font = .init(name: "Metropolis-Bold", size: 14)
-        viewAllLabel2.textAlignment = .right
-        mostPopularCollectionViewView.addSubview(viewAllLabel2)
-        viewAllLabel2.centerYAnchor.constraint(equalTo: popularLabel2.centerYAnchor).isActive = true
-        viewAllLabel2.rightAnchor.constraint(equalTo: mostPopularCollectionViewView.rightAnchor, constant: -10).isActive = true
+        mostPopularCollectionViewView.addSubview(mostPopularLabel)
+        mostPopularLabel.leftAnchor.constraint(equalTo: mostPopularCollectionViewView.leftAnchor, constant: 10).isActive = true
+        mostPopularLabel.topAnchor.constraint(equalTo: mostPopularCollectionViewView.topAnchor).isActive = true
+        mostPopularLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
-        let layout2 = UICollectionViewFlowLayout()
-        layout2.itemSize = CGSize(width: view.frame.width * 0.6, height: 190)
-        layout2.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout2.minimumLineSpacing = 20
-        layout2.scrollDirection = .horizontal
-        mostPopularCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout2)
+        let viewAllOrangeButton = UILabel()
+        viewAllOrangeButton.translatesAutoresizingMaskIntoConstraints = false
+        viewAllOrangeButton.text = "View All"
+        viewAllOrangeButton.textColor = .orange
+        viewAllOrangeButton.textAlignment = .right
+        viewAllOrangeButton.font = UIFont.systemFont(ofSize: 18)
+        mostPopularCollectionViewView.addSubview(viewAllOrangeButton)
+        viewAllOrangeButton.centerYAnchor.constraint(equalTo: mostPopularLabel.centerYAnchor).isActive = true
+        viewAllOrangeButton.rightAnchor.constraint(equalTo: mostPopularCollectionViewView.rightAnchor, constant: -10).isActive = true
+        
+        let collectionViewCustomLayout = UICollectionViewFlowLayout()
+        collectionViewCustomLayout.itemSize = CGSize(width: view.frame.width * 0.6, height: 190)
+        collectionViewCustomLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionViewCustomLayout.minimumLineSpacing = 20
+        collectionViewCustomLayout.scrollDirection = .horizontal
+        mostPopularCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewCustomLayout)
         mostPopularCollectionView.translatesAutoresizingMaskIntoConstraints = false
         mostPopularCollectionView.backgroundColor = .white
         mostPopularCollectionView.showsVerticalScrollIndicator = false
@@ -319,33 +317,31 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         mostPopularCollectionViewView.addSubview(mostPopularCollectionView)
         mostPopularCollectionView.leftAnchor.constraint(equalTo: mostPopularCollectionViewView.leftAnchor).isActive = true
         mostPopularCollectionView.rightAnchor.constraint(equalTo: mostPopularCollectionViewView.rightAnchor).isActive = true
-        mostPopularCollectionView.topAnchor.constraint(equalTo: popularLabel2.bottomAnchor,constant: 10).isActive = true
+        mostPopularCollectionView.topAnchor.constraint(equalTo: mostPopularLabel.bottomAnchor,constant: 10).isActive = true
         mostPopularCollectionView.bottomAnchor.constraint(equalTo: mostPopularCollectionViewView.bottomAnchor).isActive = true
         
-        //MARK: RECENT ITEMS TV
         flowStackView.addArrangedSubview(recentItemsTableViewView)
         
-        let popularLabel3 = UILabel()
-        popularLabel3.translatesAutoresizingMaskIntoConstraints = false
-        popularLabel3.text = "Recent Items"
-        popularLabel3.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        popularLabel3.textColor = .black
-        popularLabel3.textAlignment = .left
-        //popularLabel3.hero.id = "titleLabel"
-        recentItemsTableViewView.addSubview(popularLabel3)
-        popularLabel3.leftAnchor.constraint(equalTo: recentItemsTableViewView.leftAnchor, constant: 10).isActive = true
-        popularLabel3.topAnchor.constraint(equalTo: recentItemsTableViewView.topAnchor, constant: 10).isActive = true
-        popularLabel3.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        let recentItemsLabel = UILabel()
+        recentItemsLabel.translatesAutoresizingMaskIntoConstraints = false
+        recentItemsLabel.text = "Recent Items"
+        recentItemsLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        recentItemsLabel.textColor = .black
+        recentItemsLabel.textAlignment = .left
         
-        let viewAllLabel3 = UILabel()
-        viewAllLabel3.translatesAutoresizingMaskIntoConstraints = false
-        viewAllLabel3.text = "View All"
-        viewAllLabel3.textColor = UIColor(named:"AppOrange")
-        viewAllLabel3.font = .init(name: "Metropolis-Bold", size: 14)
-        viewAllLabel3.textAlignment = .right
-        recentItemsTableViewView.addSubview(viewAllLabel3)
-        viewAllLabel3.centerYAnchor.constraint(equalTo: popularLabel3.centerYAnchor).isActive = true
-        viewAllLabel3.rightAnchor.constraint(equalTo: recentItemsTableViewView.rightAnchor, constant: -10).isActive = true
+        recentItemsTableViewView.addSubview(recentItemsLabel)
+        recentItemsLabel.leftAnchor.constraint(equalTo: recentItemsTableViewView.leftAnchor, constant: 10).isActive = true
+        recentItemsLabel.topAnchor.constraint(equalTo: recentItemsTableViewView.topAnchor, constant: 10).isActive = true
+        recentItemsLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        let viewallbuttonorange = UILabel()
+        viewallbuttonorange.translatesAutoresizingMaskIntoConstraints = false
+        viewallbuttonorange.text = "View All"
+        viewallbuttonorange.textColor = .orange
+        viewallbuttonorange.textAlignment = .right
+        recentItemsTableViewView.addSubview(viewallbuttonorange)
+        viewallbuttonorange.centerYAnchor.constraint(equalTo: recentItemsLabel.centerYAnchor).isActive = true
+        viewallbuttonorange.rightAnchor.constraint(equalTo: recentItemsTableViewView.rightAnchor, constant: -10).isActive = true
         
         recentItemTableView.translatesAutoresizingMaskIntoConstraints = false
         recentItemTableView.delegate = self
@@ -357,7 +353,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         recentItemsTableViewView.addSubview(recentItemTableView)
         recentItemTableView.leftAnchor.constraint(equalTo: recentItemsTableViewView.leftAnchor).isActive = true
         recentItemTableView.rightAnchor.constraint(equalTo: recentItemsTableViewView.rightAnchor).isActive = true
-        recentItemTableView.topAnchor.constraint(equalTo: popularLabel3.bottomAnchor,constant: 10).isActive = true
+        recentItemTableView.topAnchor.constraint(equalTo: recentItemsLabel.bottomAnchor,constant: 10).isActive = true
         recentItemTableView.bottomAnchor.constraint(equalTo: recentItemsTableViewView.bottomAnchor).isActive = true
         recentItemTableView.rowHeight = (600-45) / 5
         
@@ -365,50 +361,45 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     
-   
+    
     
     func welcome() {
-        // Uygulama yüklendiğinde otomatik olarak çağrılan işlev
+        
         view.backgroundColor = .white
-        let titleLabel = UILabel()
+        let navbarTitleLabel = UILabel()
         let alertController = UIAlertController(title: "What is your name", message: nil, preferredStyle: .alert)
-
-        // Textfield ekleme
         alertController.addTextField { (textField) in
             textField.placeholder = "Enter Your Name"
         }
-
-        // "Tamam" eylemini oluşturun
+        
+        
         let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
             if let textField = alertController.textFields?.first, let name = textField.text {
-                // Kullanıcının girdiği ismi alın ve Navigation Bar başlığını güncelleyin
-
                 let greeting = self.getGreetingBasedOnTime()
-                titleLabel.text = "\(greeting) \(name)!"
+                navbarTitleLabel.text = "\(greeting) \(name)!"
                 self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
             }
         }
         alertController.addAction(okAction)
-
-        // UIAlertController'ı gösterin
+        
+        
         present(alertController, animated: true, completion: nil)
-
-        let customNavigationView = UIView()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        titleLabel.textColor = UIColor.black
-        customNavigationView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo: customNavigationView.topAnchor).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: customNavigationView.leftAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: customNavigationView.bottomAnchor).isActive = true
-        titleLabel.textAlignment = .left
-        navigationItem.titleView = customNavigationView
+        let navigationBarView = UIView()
+        navbarTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        navbarTitleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        navbarTitleLabel.textColor = UIColor.black
+        navigationBarView.addSubview(navbarTitleLabel)
+        navbarTitleLabel.topAnchor.constraint(equalTo: navigationBarView.topAnchor).isActive = true
+        navbarTitleLabel.leftAnchor.constraint(equalTo: navigationBarView.leftAnchor).isActive = true
+        navbarTitleLabel.bottomAnchor.constraint(equalTo: navigationBarView.bottomAnchor).isActive = true
+        navbarTitleLabel.textAlignment = .left
+        navigationItem.titleView = navigationBarView
     }
-
+    
     func getGreetingBasedOnTime() -> String {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: Date())
-        
+        print(hour)
         if 6...11 ~= hour {
             return "Good Morning"
         } else if 12...17 ~= hour {
@@ -417,7 +408,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
             return "Good Evening"
         }
     }
-
+    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -434,7 +425,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch collectionView {
         case searchMenuCollectionView :
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "kitchenCell", for: indexPath) as! SearchCollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCollectionViewCell
             
             cell.cuisineLabel.text = cuisine[indexPath.row].name
             cell.cuisineImageView.image = UIImage(named: cuisine[indexPath.row].image)
@@ -442,7 +433,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
         case mostPopularCollectionView :
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "popularCell", for: indexPath) as! MostPopularRestaurantCollectionViewCell
-            //cell.isHeroEnabled = true
+            
             
             cell.mostPopularNameLabel.text = popularRestaurants[indexPath.row].name
             cell.mostPopularRestaurantImageView.image = UIImage(named: popularRestaurants[indexPath.row].image)
