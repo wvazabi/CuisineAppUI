@@ -24,14 +24,13 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case popularTV:
             let cell = tableView.dequeueReusableCell(withIdentifier: "popularTVCell", for: indexPath) as! PopularRestaurantsTableViewCell
            
-            //cell.isHeroEnabled = true
+           
             cell.restaurentsLabel.text = restaurents[indexPath.row].name
             cell.restaurentsRatingLabel.text = String(restaurents[indexPath.row].rate)
             cell.restaurentsImageView.image = UIImage(named: restaurents[indexPath.row].image)
             cell.restaurentCuisine.text = restaurents[indexPath.row].cuisine
-            cell.commentLabel.text = "(4994 ratings)"
-            
-            
+            cell.commentLabel.text = "\(restaurents[indexPath.row].comment)"
+        
             return cell
             
         case recentTV:
@@ -92,7 +91,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 1400).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 1100).isActive = true
         return view
     }()
     
@@ -123,9 +122,11 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         welcome()
         createUI()
         
-        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "(124 ratings)Cafe      Italy", image: "pizza", comment: 213)
-        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "(280 ratings)Pub        English", image: "eng-breakfast", comment: 423)
-        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "(1000 ratings)Bakery       Middle Earth", image: "bakery", comment: 432)
+        let minuteByTukTuk = Restaurents(name: "Minute By Tuk Tuk", rate: 4.9, cuisine: "(124 ratings)Cafe      Italy", image: "popularPizza", comment: 213)
+        let cafeDeNoir = Restaurents(name: "Cafe De Noir", rate: 4.2, cuisine: "(280 ratings)Pub        English", image: "popularBreakfast", comment: 423)
+        let bakesByTella = Restaurents(name: "Bakes by Tella", rate: 4.5, cuisine: "(1000 ratings)Bakery       Middle Earth", image: "popularCroissant", comment: 432)
+        let susi = Restaurents(name: "Kakashi", rate: 5, cuisine: "(9998 ratings) Japanese Food", image: "popularSusi", comment: 2372)
+        let lasagna = Restaurents(name: "Buesnos Diaz", rate: 4.5, cuisine: "(767 ratings)Little Italy", image: "popularlasagna", comment: 432)
         
         let offer = Cuisine(name: "Offers", image: "offers")
         let srilanka = Cuisine(name: "Sri Lankan", image: "srilanka")
@@ -134,31 +135,43 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let turkish = Cuisine(name: "Turkish", image: "turkish")
         let spanish = Cuisine(name: "Spanish", image: "spanish")
         
-        let item1 = RecentItemModel(itemName: "Croissant Menu", itemRestaurant: "Uptown Bakery", itemImageName: "offers",
+        let mPizza = RecentItemModel(itemName: "Mulberry Pizza by Josh", itemRestaurant: "Cafe - Italy ", itemImageName: "recentPizza",
+                                    itemRestaurantRating: 4.9, ratingCount: 124)
+        let coffe = RecentItemModel(itemName: "Barita", itemRestaurant: "Cafe - France", itemImageName: "recentCafe",
+                                    itemRestaurantRating: 3.9, ratingCount: 689)
+        let pizzaRush = RecentItemModel(itemName: "Pizza Rush Hour", itemRestaurant: "Restaurant - Italy", itemImageName: "recentPizza2",
+                                    itemRestaurantRating: 4.3, ratingCount: 884)
+        let cornDogs = RecentItemModel(itemName: "Austin BBQ", itemRestaurant: "Street Food - USA", itemImageName: "recentCornDogs",
                                     itemRestaurantRating: 4.5, ratingCount: 94)
-        let item2 = RecentItemModel(itemName: "Margherita Pizza", itemRestaurant: "New York Pizzeria", itemImageName: "srilanka",
-                                    itemRestaurantRating: 4.1, ratingCount: 78)
-        let item3 = RecentItemModel(itemName: "Double Spicy Taco", itemRestaurant: "Theo Taco", itemImageName: "italian",
+        let halal = RecentItemModel(itemName: "Halal Guys", itemRestaurant: "Street Food - NYC", itemImageName: "recentHalal",
                                     itemRestaurantRating: 4.5, ratingCount: 94)
-        let item4 = RecentItemModel(itemName: "Dürüm with Ayran", itemRestaurant: "Merkez Döner", itemImageName: "turkish",
-                                    itemRestaurantRating: 4.5, ratingCount: 94)
-        let item5 = RecentItemModel(itemName: "Falafel Bowl", itemRestaurant: "Vegan World", itemImageName: "spanish",
-                                    itemRestaurantRating: 4.5, ratingCount: 94)
+        
+        
+        
+        let bambaa = Restaurents(name: "Café De Bambaa", rate: 4.2, cuisine: "(624 ratings)Cafe - Italy", image: "mostPopularPizza", comment: 645)
+        let borris = Restaurents(name: "Burger by Borris", rate: 3.1, cuisine: "(80 ratings)Pub-English", image: "mostPopularBlueBery", comment: 83)
+        let wagyu = Restaurents(name: "Tokya Fire", rate: 4.8, cuisine: "(1400 ratings)Legend", image: "mostPopularWagyu", comment: 4342)
+        let deep = Restaurents(name: "USA", rate: 5, cuisine: "(8400 ratings)Legend", image: "deep", comment: 6342)
+        
         
         restaurents.append(minuteByTukTuk)
         restaurents.append(cafeDeNoir)
         restaurents.append(bakesByTella)
-        
-        popularRestaurants.append(minuteByTukTuk)
-        popularRestaurants.append(cafeDeNoir)
-        popularRestaurants.append(bakesByTella)
+        restaurents.append(lasagna)
+        restaurents.append(susi)
         
         
-        recentItems.append(item1)
-        recentItems.append(item2)
-        recentItems.append(item3)
-        recentItems.append(item4)
-        recentItems.append(item5)
+        popularRestaurants.append(bambaa)
+        popularRestaurants.append(borris)
+        popularRestaurants.append(wagyu)
+        popularRestaurants.append(deep)
+        
+        
+        recentItems.append(mPizza)
+       recentItems.append(coffe)
+        recentItems.append(pizzaRush)
+        recentItems.append(cornDogs)
+        recentItems.append(halal)
         
         cuisine.append(offer)
         cuisine.append(srilanka)
@@ -183,40 +196,6 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor,constant: -8).isActive = true
         stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        
-//        stackView.addArrangedSubview(deliveryOptionView)
-//        let deliveryLabel = UILabel()
-//        deliveryLabel.translatesAutoresizingMaskIntoConstraints = false
-//        deliveryLabel.text = "Delivering to"
-//        deliveryLabel.textAlignment = .left
-//        deliveryLabel.font = .init(name: "Metropolis-Regular", size: 16)
-//        deliveryLabel.textColor = UIColor(named: "SecondaryFont")
-//        deliveryLabel.numberOfLines = 1
-//        deliveryOptionView.addSubview(deliveryLabel)
-//        deliveryLabel.leadingAnchor.constraint(equalTo: deliveryOptionView.leadingAnchor, constant: 10).isActive = true
-//        deliveryLabel.topAnchor.constraint(equalTo: deliveryOptionView.topAnchor, constant: 4).isActive = true
-//        deliveryLabel.widthAnchor.constraint(equalTo: deliveryOptionView.widthAnchor, multiplier: 0.4).isActive = true
-//
-//        deliveryButton = UIButton(type: .system)
-//        deliveryButton.translatesAutoresizingMaskIntoConstraints = false
-//        deliveryButton.showsMenuAsPrimaryAction = true
-//        deliveryButton.changesSelectionAsPrimaryAction = true
-//        deliveryButton.menu = UIMenu(title: "Locations",
-//                                     children: [UIAction(title: "Home",image: UIImage(systemName: "house.fill"), state: .on, handler: { action in
-//            self.updateDeliveryButtonTitle(action.title)
-//        }),
-//                                                UIAction(title: "Work",image: UIImage(systemName: "briefcase.fill"), handler: { action in
-//            self.updateDeliveryButtonTitle(action.title)
-//        }),
-//                                                UIAction(title: "Vacation Home",image: UIImage(systemName: "beach.umbrella.fill"), handler: { action in
-//            self.updateDeliveryButtonTitle(action.title)
-//        })])
-//        deliveryButton.setTitle("Home ▼", for: .normal)
-//
-//        deliveryOptionView.addSubview(deliveryButton)
-//        deliveryButton.leadingAnchor.constraint(equalTo: deliveryLabel.leadingAnchor).isActive = true
-//        deliveryButton.topAnchor.constraint(equalTo: deliveryLabel.bottomAnchor,constant: 2).isActive = true
-//
         stackView.addArrangedSubview(searchView)
         searchView.leftAnchor.constraint(equalTo: stackView.leftAnchor, constant: 10).isActive = true
         searchView.rightAnchor.constraint(equalTo: stackView.rightAnchor, constant: -10).isActive = true
@@ -277,7 +256,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularLabel.translatesAutoresizingMaskIntoConstraints = false
         popularLabel.text = "Popular Restaurants"
         popularLabel.textColor = UIColor(named: "PrimaryFont")
-        popularLabel.font = .init(name: "Metropolis-ExtraBold", size: 22)
+        popularLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         popularLabel.textAlignment = .left
         //popularLabel.hero.id = "titleLabel"
         popularTVView.addSubview(popularLabel)
@@ -308,8 +287,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popularTV.rightAnchor.constraint(equalTo: popularTVView.rightAnchor).isActive = true
         popularTV.topAnchor.constraint(equalTo: popularLabel.bottomAnchor,constant: 10).isActive = true
         popularTV.bottomAnchor.constraint(equalTo: popularTVView.bottomAnchor).isActive = true
-        popularTV.rowHeight = (1400-45) / 5
-        
+        popularTV.rowHeight = 265
         //MARK: RESTAURANTS CV
         stackView.addArrangedSubview(popularCVView)
         
@@ -322,7 +300,7 @@ class FlowViewController: UIViewController, UICollectionViewDelegate, UICollecti
         //popularLabel2.hero.id = "titleLabel"
         popularCVView.addSubview(popularLabel2)
         popularLabel2.leftAnchor.constraint(equalTo: popularCVView.leftAnchor, constant: 10).isActive = true
-        popularLabel2.topAnchor.constraint(equalTo: popularCVView.topAnchor, constant: 10).isActive = true
+        popularLabel2.topAnchor.constraint(equalTo: popularCVView.topAnchor).isActive = true
         popularLabel2.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         let viewAllLabel2 = UILabel()
